@@ -60,9 +60,7 @@ _This app is a music quiz using the Spotify API and user data to create a person
 * Run '$ npm run start' to serve the app on localhost:8080.
 
 ## Component Tree
-![Component Tree](https://drive.google.com/file/d/1p6pow7zsZ0wvW18g68x4JA8sYj7OWxk_/view?usp=sharing)
-
-//(./src/assets/insertRemainingFilePath)
+![Component Tree](./src/assets/On-The-Spot-ify.jpg)
 
 
 ## Known Issues
