@@ -1,33 +1,56 @@
-# _Tap Room using React_
+# _On The Spot-ify_
 
 #### By: _**Kayl Eubanks**_
 
 ## Description
 
-_This app is a clone of a previous project creating a mock tap room website. This is recreating a previous project using JSX and React instead of Angular._
+_This app is a music quiz using the Spotify API and user data to create a personalized experience. This application is built with React via the create-react-app._
+
+### Project Proposal:
+* Name of Project: _On The Spot-ify_
+
+* Project’s Purpose or Goal: _This app will allow users to play a personalized music quiz using their own Spotify API data. Eventually will turn into a two-player competitive quiz using artists/songs known to both players._
+
+* List the absolute minimum features the project requires to meet this purpose or goal:
+ * _Will use my personal Spotify account for verification_
+ * _Will play short clip of song and provide 4 choices of potential answers to player_
+ * _Will give points to player if song is identified correctly, point value varies based on time taken to answer question_
+ * _Will track overall point total and average time to answer for a play session_
+
+
+* What tools, frameworks, libraries, APIs, modules and/or other resources (whatever is specific to your track, and yourlanguage) will you use to create this MVP? List them all here. Be specific.
+
+ * React
+ * Spotify API
+ *  Redux
+ *  Create React App
+ *  Firebase or custom Heroku SQL database
+
+
+* If you finish developing the minimum viable product (MVP) with time to spare, what will you work on next?
+
+ * _Allow input of different user authentication and return more personalized quiz data_
+ * _Connect two instances of app for competitive play_
+ * _Compare two separate users and return commonly shared artists/songs/albums etc._
+
+
+* What additional tools, frameworks, libraries, APIs, or other resources will these additional features require?
+
+ * socket.io (?)
+ * need more research on connecting two instances of app through internet
+
 
 ## Setup/Installation Requirement for Developers:
 
-* Clone repository on your local computer from https://github.com/K-Banks/tap-room-react.
+* Clone repository on your local computer from https://github.com/K-Banks/On-The-Spotify.
 * Navigate into project directory in command line.
 * Install node package manager if not already installed on local machine.
 * Run '$ npm install' to download all needed dependencies.
-* Run '$ npm run start' to serve the app on localhost:8080
+* Run '$ npm run start' to serve the app on localhost:8080.
 
 ## Component Tree
-![Component Tree](./src/assets/READMEImg/TapRoomComponentTree.jpg)
+![Component Tree](./src/assets/insertRemainingFilePath)
 
-## Notes
- * Designing a component tree is difficult in React without starting to work through the application
- * How can I change the Header's appearance when navigating to a page that does not exist?
- * How can I change the favicon? React-favicon is unclear on proper implementation.
- * Need to re-use the KegList component and hide/show the purchase button based on the route
-
-## Differences between developing in React vs Angular
-  * No services to handle moving information around the app in React
-  * Re-using components is simpler and more dynamic in React
-  * Programming in React without prior planning is difficult and leads to more problems by comparison
-  * Syntax is so much simpler in React
 
 ## Known Issues
 _No known bugs at this time._
@@ -37,7 +60,6 @@ _Please contact author at kayleubanks@gmail.com with any bugs._
 
  * JavaScript
  * React
- * CSS-Modules
  * JSX
  * This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
