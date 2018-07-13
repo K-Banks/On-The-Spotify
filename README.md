@@ -40,6 +40,17 @@ _This app is a music quiz using the Spotify API and user data to create a person
  * need more research on connecting two instances of app through internet
 
 
+### Project Log:
+* 7/13/18:
+  * Spend morning (8:30am-12pm) attempting to make a successful api call via Postman
+   * Unsuccessful. Trouble with authentication and submitting request correctly
+   * Speak with Tyler about this if unable to resolve by 7/18/18
+  * Created initial project folder and repo on GitHub, gather dependencies and dev tools (1pm-2pm)
+   * Recalled Tyler suggesting using Create React App. Decided to scrap and start from scratch
+  * Recreate project folder using Create React App
+  * Editing README to include Project Proposal and Project Log sections
+  * Spend rest of day planning project and reading documentation for Spotify API and Create React App functionality`
+
 ## Setup/Installation Requirement for Developers:
 
 * Clone repository on your local computer from https://github.com/K-Banks/On-The-Spotify.
