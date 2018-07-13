@@ -2,6 +2,11 @@
 
 #### By: _**Kayl Eubanks**_
 
+### Useful links to refer to during development
+* Blog on making an API call in Postman with the Spotify API - http://blog.getpostman.com/2016/11/09/generate-spotify-playlists-using-a-postman-collection/
+* Spotify Developer documentation - https://developer.spotify.com/
+* Create React App - https://github.com/facebook/create-react-app.git
+
 ## Description
 
 _This app is a music quiz using the Spotify API and user data to create a personalized experience. This application is built with React via the create-react-app._
