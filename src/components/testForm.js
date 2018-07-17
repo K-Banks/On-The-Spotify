@@ -5,6 +5,7 @@ import { fetchSong } from './../actions';
 function TestForm(props) {
 
   function handleTestClick(event){
+    const {dispatch} = props;
     console.log('you clicked me');
     fetchSong();
     console.log(fetchSong());
