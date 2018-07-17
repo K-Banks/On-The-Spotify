@@ -6,6 +6,7 @@
 * Blog on making an API call in Postman with the Spotify API - http://blog.getpostman.com/2016/11/09/generate-spotify-playlists-using-a-postman-collection/
 * Spotify Developer documentation - https://developer.spotify.com/
 * Create React App - https://github.com/facebook/create-react-app.git
+* add CORS extension to browser
 
 ## Description
 
