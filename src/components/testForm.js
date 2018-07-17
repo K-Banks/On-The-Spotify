@@ -1,15 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { fetchSong } from './../actions';
 
 function TestForm(props) {
 
   function handleTestClick(event){
-    const { dispatch } = props;
     console.log('you clicked me');
-    const action = {
-      type: 'REQUEST'
-    }
-    dispatch(action);
+    fetchSong();
+    console.log(fetchSong());
   }
 
   return(
