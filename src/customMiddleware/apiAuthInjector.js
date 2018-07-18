@@ -5,7 +5,6 @@ export default store => next => action => {
   const callApi = action[CALL_API];
   if (callApi) {
     callApi.headers = Object.assign({}, callApi.headers, {
-      Authorization: APIKEY
     });
   }
   return next(action);

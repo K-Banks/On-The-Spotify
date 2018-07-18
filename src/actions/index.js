@@ -2,16 +2,18 @@ import * as types from './../constants';
 import { CALL_API } from 'redux-api-middleware';
 
 export function fetchSong() {
-  return function(dispatch) {
-    const xxx = {
-      [CALL_API]: {
-        endpoint: 'https://api.spotify.com/v1/artists/066X20Nz7iquqkkCW6Jxy6',
-        method: 'GET',
-        // Don't have to manually add the Authorization header to every request.
-        headers: { 'Content-Type': 'application/json' },
-        types: ['REQUEST', 'SUCCESS', 'FAILURE']
-      }
+  const url = 'https://api.spotify.com/v1/artists/1LeVJ5GPeYDOVUjxx1y7Rp';
+  fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + 'AQDRomX2sLJes1St1TKZLxKBZsIL_uHdRCxToGoNIHlFv0ewbirkOJufybqkl6UrV8q_eWY02U4dADusP8xpZLxhJ0JtQ0_Y5uxsCw2x4wFIFfv-6MQJ4ibzomrk0tXkZdo'
     }
-    dispatch(xxx).then(console.log(response.json()))
-  }
+  }).then(
+    response => response.json()
+  ).then(
+    data => {
+      console.log(data);
+    }
+  );
 }

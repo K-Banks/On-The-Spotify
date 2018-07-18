@@ -8,7 +8,6 @@ function TestForm(props) {
     const {dispatch} = props;
     console.log('you clicked me');
     fetchSong();
-    console.log(fetchSong());
   }
 
   return(
