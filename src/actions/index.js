@@ -1,6 +1,4 @@
-import * as types from './../constants';
-import { CALL_API } from 'redux-api-middleware';
-import { getKey } from './../keys';
+import { getKey } from './../key';
 
 export function fetchSong() {
   const url = 'https://api.spotify.com/v1/me/top/artists';
