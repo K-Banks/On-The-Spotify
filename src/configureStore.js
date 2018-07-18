@@ -5,7 +5,7 @@ import apiAuthInjector from './customMiddleware/apiAuthInjector';
 
 export default function(initialState) {
   return createStore(rootReducer, initialState, applyMiddleware(
-    apiAuthInjector,
+
     apiMiddleware
   ))
 }
