@@ -1,5 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
-import { getKey } from './../keys/';
+import { getKey } from './../key/';
 
 export default store => next => action => {
   const callApi = action[CALL_API];
