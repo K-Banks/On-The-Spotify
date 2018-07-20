@@ -114,7 +114,8 @@ export const initialState = {
     userToken: 'string',
     userRefreshToken: 'string'
   },
-  roundStart: false
+  roundStart: false,
+  currentRound: 0
 };
 
 export const dummyAccountEmail = "kijivinih@99pubblicita.com";
