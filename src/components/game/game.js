@@ -5,6 +5,7 @@ function Game(props){
   function logState() {
     console.log(props.state);
     console.log(props.state.roundAnswers);
+    console.log(props.state.gameData.songData[props.state.currentRound].trackAudio);
   };
 
   function checkAnswer(artist) {
@@ -24,6 +25,9 @@ function Game(props){
       {props.state.roundAnswers.map((artist, key) =>
         <p key={key} onClick={() => {checkAnswer(artist)}}>{artist}</p>
       )}
+      <audio controls>
+        <source src={props.state.gameData.songData[props.state.currentRound].trackAudio} type="audio/mpeg">
+      </audio>
     </div>
   );
 }
