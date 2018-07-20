@@ -3,8 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import TestForm from './components/testForm';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 class App extends Component {
+
+  logger() {
+    console.log(this.props);
+  };
+
   render(props) {
     return (
       <div className="App">
@@ -16,9 +22,16 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <TestForm />
+        <Switch>
+          <Route exact path='/' render={()=><TestForm />} />
+        </Switch>
       </div>
     );
   }
 }
 
-export default connect()(App);
+const mapStateToProps = state => {
+  return {};
+};
+
+export default withRouter(connect(mapStateToProps)(App));
