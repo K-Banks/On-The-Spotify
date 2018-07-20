@@ -11,7 +11,10 @@ class App extends React.Component {
     super(props);
     this.state = initialState;
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
-    this.roundAnswers = this.randomizeAnswers();
+  }
+
+  componentDidMount() {
+    this.randomizeAnswers();
   }
 
   randomizeAnswers() {
@@ -27,8 +30,9 @@ class App extends React.Component {
         randomizedAnswersArray.push(answerArray[selection]);
       }
     }
-    console.log(randomizedAnswersArray);
-    return randomizedAnswersArray;
+    let newState = Object.assign({}, this.state);
+    newState.roundAnswers = randomizedAnswersArray;
+    this.setState(newState);
   };
 
   render() {
