@@ -12,9 +12,7 @@ function TestForm(props) {
 
   return(
     <div>
-      <form onSubmit={() => {handleTestClick();}}>
-        <button type='submit'>Help!</button>
-      </form>
+        <h1>Hello is this thing on?</h1>
     </div>
   );
 }

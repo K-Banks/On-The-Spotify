@@ -4,6 +4,8 @@ import './App.css';
 import { connect } from 'react-redux';
 import TestForm from './components/testForm';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import Game from './components/game/game';
+import { Link } from 'react-router-dom';
 
 class App extends Component {
 
@@ -20,10 +22,11 @@ class App extends Component {
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
+          <Link to="/game">Test link</Link>
         </p>
-        <TestForm />
         <Switch>
           <Route exact path='/' render={()=><TestForm />} />
+          <Route path="/game" render={()=><Game />} />
         </Switch>
       </div>
     );
