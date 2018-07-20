@@ -11,10 +11,20 @@ class App extends React.Component {
     super(props);
     this.state = initialState;
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
+    this.countDown = this.countDown.bind(this);
   }
 
   componentDidMount() {
     this.randomizeAnswers();
+  }
+
+  countDown(){
+    let timer = 30;
+    function decrement(timer){return timer-1;}
+    while (timer > 0) {
+      timer = setTimeout(decrement(), 1000, timer);
+      console.log(timer);
+    }
   }
 
   randomizeAnswers() {
@@ -42,6 +52,7 @@ class App extends React.Component {
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png' className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to On-The-Spotify</h1>
         </header>
+        <button onClick={() => {this.countDown();}}>Start timer</button>
         <Switch>
           <Route exact path='/' render={()=><TestForm />} />
           <Route path="/game" render={()=><Game state={this.state} roundAnswers={this.roundAnswers}/>} />
