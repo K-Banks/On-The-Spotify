@@ -13,7 +13,7 @@ function TestForm(props) {
 
   return(
     <div>
-        <Link to="/game">START</Link>
+        <Link to="/game">START A GAME!</Link>
     </div>
   );
 }
