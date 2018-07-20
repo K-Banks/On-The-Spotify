@@ -16,10 +16,13 @@ class App extends React.Component {
 
   componentDidMount() {
     this.randomizeAnswers();
-    this.timer = setInterval(this.countDown, 1000);
   }
 
   countDown(){
+    this.timer = setInterval(this.countDown, 1000);
+
+
+    
     let newTimer = Object.assign({}, this.state);
     console.log(newTimer.roundTimer);
     if (newTimer.roundTimer > 0) {
