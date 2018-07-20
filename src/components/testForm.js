@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSong } from './../actions';
+import { Link } from 'react-router-dom';
 
 function TestForm(props) {
 
@@ -12,7 +13,7 @@ function TestForm(props) {
 
   return(
     <div>
-        <h1>Hello is this thing on?</h1>
+        <Link to="/game">START</Link>
     </div>
   );
 }
