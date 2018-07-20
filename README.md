@@ -7,6 +7,7 @@
 * Spotify Developer documentation - https://developer.spotify.com/
 * Create React App - https://github.com/facebook/create-react-app.git
 * add CORS extension to browser
+* Spotify API example libraries - https://developer.spotify.com/documentation/web-api/libraries/
 
 ## Description
 
