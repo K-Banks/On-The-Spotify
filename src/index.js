@@ -6,8 +6,9 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import configureStore from './configureStore';
+import {initialState} from './constants';
 
-const store = configureStore({});
+const store = configureStore(initialState);
 
 let unsubscribe = store.subscribe(() =>
   console.log(store.getState())

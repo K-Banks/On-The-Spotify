@@ -19,9 +19,10 @@ class App extends Component {
         <header className="App-header">
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png' className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to ME React</h1>
+          <button onClick={() => {this.logger();}}>APP PROPS LOGGER</button>
         </header>
         <Switch>
-          <Route exact path='/' render={()=><TestForm />} />
+          <Route exact path='/' render={()=><TestForm state={props}/>} />
           <Route path="/game" render={()=><Game />} />
         </Switch>
       </div>
@@ -30,7 +31,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {state: state};
 };
 
 export default withRouter(connect(mapStateToProps)(App));
