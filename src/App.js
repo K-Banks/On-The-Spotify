@@ -10,7 +10,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = initialState;
+    this.randomizeAnswers = this.randomizeAnswers.bind(this);
+    this.roundAnswers = this.randomizeAnswers();
   }
+
+  randomizeAnswers() {
+    let randomizedAnswersArray = [];
+    let answer1 = this.state.gameData.songData[this.state.currentRound].artistName;
+    let answer2 = this.state.gameData.wrongArtistNames[this.state.currentRound][0];
+    let answer3 = this.state.gameData.wrongArtistNames[this.state.currentRound][1];
+    let answer4 = this.state.gameData.wrongArtistNames[this.state.currentRound][2];
+    const answerArray = [answer1, answer2, answer3, answer4];
+    while (randomizedAnswersArray.length < 4) {
+      let selection = Math.floor(Math.random() * 4);
+      if (randomizedAnswersArray.includes(answerArray[selection]) === false) {
+        randomizedAnswersArray.push(answerArray[selection]);
+      }
+    }
+    console.log(randomizedAnswersArray);
+    return randomizedAnswersArray;
+  };
 
   render() {
     return (
@@ -21,7 +40,7 @@ class App extends React.Component {
         </header>
         <Switch>
           <Route exact path='/' render={()=><TestForm />} />
-          <Route path="/game" render={()=><Game state={this.state}/>} />
+          <Route path="/game" render={()=><Game state={this.state} roundAnswers={this.roundAnswers}/>} />
         </Switch>
       </div>
     );
