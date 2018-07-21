@@ -7,10 +7,51 @@
 * Spotify Developer documentation - https://developer.spotify.com/
 * Create React App - https://github.com/facebook/create-react-app.git
 * add CORS extension to browser
+* Spotify API example libraries - https://developer.spotify.com/documentation/web-api/libraries/
 
 ## Description
 
 _This app is a music quiz using the Spotify API and user data to create a personalized experience. This application is built with React via the create-react-app._
+
+## Flow of app
+* User will be prompted to log in using their Spotify account(postponed)
+  * OAuth 2.0 token request will prompt user for permission to access their data
+* User will press button to begin a game
+* A game consists of:
+  * 10 questions - each prompts user to identify the audio clip being played
+  * 4 potential answers per questions (1 correct and 3 incorrect)
+  * 30 seconds of audio for each question
+  * 30 seconds to submit guess
+  * a decreasing points score based on amount of time passed since clip began
+  * user will be allowed a single guess per question
+  * At end of game user will be shown total number of points scored and number of questions answered correctly
+* Game data flow:
+  * initial request for user top artists/user's saved tracks
+  * store 10 random artistId/trackId values for answers (assuming every track has 30 sec preview)
+  * for each answer artistId:
+    * request related artists and store 3 random artist names for each question (30 total)
+    * request top tracks:
+      * pick random song, store track name, artist name, and preview url
+* Example state object:
+state: { 
+  game results: {
+    answerResults: [boolean, boolean, ..., boolean],
+    answerPoints: [#, #, ..., #]
+  },
+  game data: {
+    answerArtists: ['string', 'string', ..., 'string'],
+    songData: [{
+        trackName: 'string',
+        artistName: 'string',
+        trackAudio: 'string'
+      }, {...}, ..., {...}],
+    wrongArtistNames: [['string', 'string', ..., 'string'], [...], ..., [...]]
+  },
+  user authentication: {
+    userToken: 'string',
+    userRefreshToken: 'string'
+  },
+}
 
 ### Project Proposal:
 * Name of Project: _On The Spot-ify_
