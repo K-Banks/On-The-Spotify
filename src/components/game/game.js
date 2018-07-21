@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactAudioPlayer from 'react-audio-player';
 
 function Game(props){
   function logState() {
@@ -25,9 +26,11 @@ function Game(props){
       {props.state.roundAnswers.map((artist, key) =>
         <p key={key} onClick={() => {checkAnswer(artist)}}>{artist}</p>
       )}
-      <audio controls>
-        <source src={props.state.gameData.songData[props.state.currentRound].trackAudio} type="audio/mpeg">
-      </audio>
+      <ReactAudioPlayer
+        src={props.state.gameData.songData[props.state.currentRound].trackAudio}
+        autoPlay
+        controls
+      />
     </div>
   );
 }
