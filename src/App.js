@@ -15,11 +15,11 @@ class App extends React.Component {
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
     this.resetRoundTimer = this.resetRoundTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
   };
 
   componentDidMount() {
     this.randomizeAnswers();
-    this.resetRoundTimer();
   };
 
   resetRoundTimer() {
@@ -29,9 +29,15 @@ class App extends React.Component {
   };
 
   startTimer() {
+    this.resetRoundTimer();
     if (this.timer === 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
+  }
+
+  stopTimer() {
+    clearInterval(this.timer);
+    this.timer = 0;
   }
 
   countDown() {
@@ -71,10 +77,11 @@ class App extends React.Component {
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png' className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to On-The-Spotify</h1>
         </header>
+        <button onClick={() => {this.stopTimer();}}>Stop Timer</button>
         <h2>Time remaining: {this.state.timeRemaining}</h2>
         <Switch>
           <Route exact path='/' render={()=><TestForm />} />
-          <Route path="/game" render={()=><Game state={this.state} roundAnswers={this.roundAnswers} startTimer={this.startTimer}/>} />
+          <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer}/>} />
         </Switch>
       </div>
     );

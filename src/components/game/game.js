@@ -10,6 +10,7 @@ function Game(props){
   };
 
   function checkAnswer(artist) {
+    props.stopTimer();
     console.log('checking answer');
     console.log(artist);
     if (artist === props.state.gameData.songData[props.state.currentRound].artistName) {
@@ -38,7 +39,8 @@ function Game(props){
   Game.propTypes = {
     state: PropTypes.object,
     roundAnswers: PropTypes.array,
-    startTimer: PropTypes.func
+    startTimer: PropTypes.func,
+    stopTimer: PropTypes.func
   }
 
 export default Game;
