@@ -114,7 +114,9 @@ export const initialState = {
   roundStart: false,
   currentRound: 0,
   roundAnswers: [],
-  timeRemaining: 0
+  timeRemaining: 0,
+  gameStatus: false,
+  test: 'hello this is test'
 };
 
 export const dummyAccountEmail = "kijivinih@99pubblicita.com";

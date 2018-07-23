@@ -6,13 +6,13 @@ function TestForm(props) {
 
   return(
     <div>
-        <Link to="/game" onClick={() => {props.startTimer();}}>START A GAME!</Link>
+        <Link to="/game" onClick={() => {props.gameStart();}}>START A GAME!</Link>
     </div>
   );
 }
 
 TestForm.propTypes = {
-  startTimer: PropTypes.func
+  gameStart: PropTypes.func
 }
 
 export default TestForm;

@@ -3,6 +3,7 @@ import './App.css';
 import TestForm from './components/testForm';
 import { Switch, Route, Link } from 'react-router-dom';
 import Game from './components/game/game';
+import Scoreboard from './components/Scoreboard/Scoreboard';
 import {initialState} from './constants';
 
 class App extends React.Component {
@@ -18,6 +19,8 @@ class App extends React.Component {
     this.stopTimer = this.stopTimer.bind(this);
     this.addRoundAnswer = this.addRoundAnswer.bind(this);
     this.goToNextRound = this.goToNextRound.bind(this);
+    this.toggleRoundStart = this.toggleRoundStart.bind(this);
+    this.gameStart = this.gameStart.bind(this);
   };
 
   componentDidMount() {
@@ -41,7 +44,6 @@ class App extends React.Component {
     this.addRoundAnswer(boolean);
     clearInterval(this.timer);
     this.timer = 0;
-    this.goToNextRound();
   }
 
   addRoundAnswer(boolean) {
@@ -64,14 +66,16 @@ class App extends React.Component {
     }
     newState.gameResults.push(roundData);
     this.setState(newState);
+    this.toggleRoundStart();
   }
 
   goToNextRound() {
     let newState = this.state;
     newState.currentRound = newState.currentRound + 1;
     if (newState.currentRound >= 10) {
-      this.setState(newState);
+      newState.gameStatus = false;
     }
+    this.setState(newState);
     this.startTimer();
     this.randomizeAnswers();
   }
@@ -103,6 +107,26 @@ class App extends React.Component {
     this.setState(newState);
   };
 
+  toggleRoundStart() {
+    let toggle = this.state;
+    if (toggle.roundStart) {
+      toggle.roundStart = false;
+      this.setState(toggle);
+    } else {
+      toggle.roundStart = true;
+      this.setState(toggle);
+      this.goToNextRound();
+    }
+  }
+
+  gameStart(){
+    let game = this.state;
+    game.gameStatus = true;
+    game.roundStart = true;
+    this.setState(game);
+    this.startTimer();
+  }
+
   render() {
     return (
       <div className="App">
@@ -113,9 +137,10 @@ class App extends React.Component {
         </header>
         <h2>Time remaining: {this.state.timeRemaining}</h2>
         <Switch>
-          <Route exact path='/' render={()=><TestForm startTimer={this.startTimer}/>} />
-          <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer}/>} />
+          <Route exact path='/' render={()=><TestForm gameStart={this.gameStart}/>} />
+          <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer} toggleRoundStart={this.toggleRoundStart}/>} />
         </Switch>
+        <Scoreboard state={this.state}/>
       </div>
     );
   }
