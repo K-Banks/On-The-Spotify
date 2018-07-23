@@ -16,6 +16,8 @@ class App extends React.Component {
     this.countDown = this.countDown.bind(this);
     this.resetRoundTimer = this.resetRoundTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
+    this.addRoundAnswer = this.addRoundAnswer.bind(this);
+    this.goToNextRound = this.goToNextRound.bind(this);
   };
 
   componentDidMount() {
@@ -36,8 +38,23 @@ class App extends React.Component {
   }
 
   stopTimer() {
+    this.addRoundAnswer();
     clearInterval(this.timer);
     this.timer = 0;
+    this.goToNextRound();
+  }
+
+  addRoundAnswer() {
+    let newState = this.state;
+    newState.gameResults.answerPoints.push(newState.timeRemaining);
+    this.setState(newState);
+  }
+
+  goToNextRound() {
+    let newState = this.state;
+    newState.currentRound = newState.currentRound + 1;
+    this.setState(newState);
+    this.randomizeAnswers();
   }
 
   countDown() {
