@@ -21,6 +21,7 @@ function Game(props){
 
   return(
     <div>
+      <button onClick={() => {props.startTimer();}}>Start timer</button>
       <h1>Which artist wrote this song?</h1>
       <button onClick={() => {logState();}}>Press button to print state to console.</button>
       {props.state.roundAnswers.map((artist, key) =>
@@ -28,7 +29,6 @@ function Game(props){
       )}
       <ReactAudioPlayer
         src={props.state.gameData.songData[props.state.currentRound].trackAudio}
-        autoPlay
         controls
       />
     </div>
@@ -37,7 +37,8 @@ function Game(props){
 
   Game.propTypes = {
     state: PropTypes.object,
-    roundAnswers: PropTypes.array
+    roundAnswers: PropTypes.array,
+    startTimer: PropTypes.func
   }
 
 export default Game;

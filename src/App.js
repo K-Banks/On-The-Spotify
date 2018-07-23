@@ -71,11 +71,10 @@ class App extends React.Component {
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png' className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to On-The-Spotify</h1>
         </header>
-        <button onClick={() => {this.startTimer();}}>Start timer</button>
         <h2>Time remaining: {this.state.timeRemaining}</h2>
         <Switch>
           <Route exact path='/' render={()=><TestForm />} />
-          <Route path="/game" render={()=><Game state={this.state} roundAnswers={this.roundAnswers}/>} />
+          <Route path="/game" render={()=><Game state={this.state} roundAnswers={this.roundAnswers} startTimer={this.startTimer}/>} />
         </Switch>
       </div>
     );
