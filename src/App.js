@@ -3,6 +3,7 @@ import './App.css';
 import TestForm from './components/testForm';
 import { Switch, Route } from 'react-router-dom';
 import Game from './components/game/game';
+import Scoreboard from './components/Scoreboard/Scoreboard';
 import {initialState} from './constants';
 
 class App extends React.Component {
@@ -103,6 +104,7 @@ class App extends React.Component {
           <Route exact path='/' render={()=><TestForm startTimer={this.startTimer}/>} />
           <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer}/>} />
         </Switch>
+        <Scoreboard state={this.state}/>
       </div>
     );
   }
