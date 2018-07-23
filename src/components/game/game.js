@@ -32,12 +32,6 @@ function Game(props){
         src={props.state.gameData.songData[props.state.currentRound].trackAudio}
         autoPlay
       />
-      <div>
-        <h4>Round Results: </h4>
-        {props.state.gameResults.answerPoints.map((points, key) =>
-        <p key={key}>You earned this many points: {points}</p>
-        )}
-      </div>
     </div>
   );
 }

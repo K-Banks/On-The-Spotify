@@ -5,7 +5,14 @@ function Scoreboard(props) {
   return(
     <div>
       <h3>This is the scoreboard</h3>
-      <p>{props.state.roundAnswers}</p>
+      {props.state.gameResults.map((results, key) =>
+        <ul key={key}>
+          <li>Artist: {results.artist}</li>
+          <li>Track: {results.track}</li>
+          <li>Correct: {results.answerString}</li>
+          <li>Points: {results.points}</li>
+        </ul>
+      )}
     </div>
   );
 }

@@ -47,14 +47,24 @@ class App extends React.Component {
 
   addRoundAnswer(boolean) {
     let newState = this.state;
+    let score;
+    let rightWrong;
     if (boolean === true) {
-      newState.gameResults.answerPoints.push(newState.timeRemaining);
+      score = this.state.timeRemaining;
+      rightWrong = 'Correct';
     } else {
-      newState.gameResults.answerPoints.push(0);
+      score = 0;
+      rightWrong = 'Wrong';
     }
-    newState.gameResults.answerResults.push(boolean);
+    let roundData = {
+      artist: newState.gameData.songData[newState.currentRound].artistName,
+      track: newState.gameData.songData[newState.currentRound].trackName,
+      correct: boolean,
+      points: score,
+      answerString: rightWrong
+    }
+    newState.gameResults.push(roundData);
     this.setState(newState);
-    console.log(this.state.gameResults.answerPoints)
   }
 
   goToNextRound() {
