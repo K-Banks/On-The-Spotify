@@ -17,6 +17,9 @@ function Game(props){
     } else {
       props.stopTimer();
     }
+    if (props.state.currentRound >= 9) {
+      props.endGame();
+    }
   }
 
   if (props.state.gameStatus === false) {
@@ -27,6 +30,7 @@ function Game(props){
     return(
       <div>
         <h1>Which artist wrote this song?</h1>
+        <h2>Time remaining: {props.state.timeRemaining}</h2>
         <button onClick={() => {logState();}}>Press button to print state to console.</button>
         {props.state.roundAnswers.map((artist, key) =>
           <p key={key} onClick={() => {checkAnswer(artist)}}>{artist}</p>

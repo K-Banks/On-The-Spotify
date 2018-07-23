@@ -21,6 +21,7 @@ class App extends React.Component {
     this.goToNextRound = this.goToNextRound.bind(this);
     this.toggleRoundStart = this.toggleRoundStart.bind(this);
     this.gameStart = this.gameStart.bind(this);
+    this.endGame = this.endGame.bind(this);
   };
 
   componentDidMount() {
@@ -72,13 +73,16 @@ class App extends React.Component {
   goToNextRound() {
     let newState = this.state;
     newState.currentRound = newState.currentRound + 1;
-    if (newState.currentRound >= 10) {
-      newState.gameStatus = false;
-    }
     this.setState(newState);
     this.startTimer();
     this.randomizeAnswers();
-  }
+  };
+
+  endGame() {
+    let game = this.state;
+    game.gameStatus = false;
+    this.setState(game);
+  };
 
   countDown() {
     let seconds = this.state;
@@ -135,10 +139,9 @@ class App extends React.Component {
           <h1 className="App-title">Welcome to On-The-Spotify</h1>
           <Link to='/'>Home</Link>
         </header>
-        <h2>Time remaining: {this.state.timeRemaining}</h2>
         <Switch>
           <Route exact path='/' render={()=><TestForm gameStart={this.gameStart}/>} />
-          <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer} toggleRoundStart={this.toggleRoundStart}/>} />
+          <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer} toggleRoundStart={this.toggleRoundStart} endGame={this.endGame}/>} />
         </Switch>
         <Scoreboard state={this.state}/>
       </div>
