@@ -10,19 +10,19 @@ function Game(props){
   };
 
   function checkAnswer(artist) {
-    props.stopTimer();
     console.log('checking answer');
     console.log(artist);
     if (artist === props.state.gameData.songData[props.state.currentRound].artistName) {
       console.log('You are correct');
+      props.stopTimer(true);
     } else {
       console.log("Sorry, that's not right");
+      props.stopTimer();
     }
   }
 
   return(
     <div>
-      <button onClick={() => {props.startTimer();}}>Start timer</button>
       <h1>Which artist wrote this song?</h1>
       <button onClick={() => {logState();}}>Press button to print state to console.</button>
       {props.state.roundAnswers.map((artist, key) =>
@@ -30,8 +30,14 @@ function Game(props){
       )}
       <ReactAudioPlayer
         src={props.state.gameData.songData[props.state.currentRound].trackAudio}
-        controls
+        autoPlay
       />
+      <div>
+        <h4>Round Results: </h4>
+        {props.state.gameResults.answerPoints.map((points, key) =>
+        <p key={key}>You earned this many points: {points}</p>
+        )}
+      </div>
     </div>
   );
 }

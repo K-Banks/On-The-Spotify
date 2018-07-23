@@ -37,33 +37,37 @@ class App extends React.Component {
     }
   }
 
-  stopTimer() {
-    this.addRoundAnswer();
+  stopTimer(boolean) {
+    this.addRoundAnswer(boolean);
     clearInterval(this.timer);
     this.timer = 0;
     this.goToNextRound();
   }
 
-  addRoundAnswer() {
+  addRoundAnswer(boolean) {
     let newState = this.state;
-    newState.gameResults.answerPoints.push(newState.timeRemaining);
+    if (boolean === true) {
+      newState.gameResults.answerPoints.push(newState.timeRemaining);
+    } else {
+      newState.gameResults.answerPoints.push(0);
+    }
+    newState.gameResults.answerResults.push(boolean);
     this.setState(newState);
+    console.log(this.state.gameResults.answerPoints)
   }
 
   goToNextRound() {
     let newState = this.state;
     newState.currentRound = newState.currentRound + 1;
     this.setState(newState);
+    this.startTimer();
     this.randomizeAnswers();
   }
 
   countDown() {
-    // Remove one second, set state so a re-render happens.
     let seconds = this.state;
     seconds.timeRemaining = seconds.timeRemaining - 1;
     this.setState(seconds);
-
-    // Check if we're at zero.
     if (seconds.timeRemaining === 0) {
       clearInterval(this.timer);
     }
@@ -94,10 +98,9 @@ class App extends React.Component {
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png' className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to On-The-Spotify</h1>
         </header>
-        <button onClick={() => {this.stopTimer();}}>Stop Timer</button>
         <h2>Time remaining: {this.state.timeRemaining}</h2>
         <Switch>
-          <Route exact path='/' render={()=><TestForm />} />
+          <Route exact path='/' render={()=><TestForm startTimer={this.startTimer}/>} />
           <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer}/>} />
         </Switch>
       </div>
