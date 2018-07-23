@@ -4,22 +4,47 @@ import TestForm from './components/testForm';
 import { Switch, Route } from 'react-router-dom';
 import Game from './components/game/game';
 import {initialState} from './constants';
-import Timer from './components/timer/timer';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = initialState;
-    this.timerLeft = this.state.roundTimer;
-    this.counter = 30;
+    this.timer = 0;
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
-  }
+    this.startTimer = this.startTimer.bind(this);
+    this.countDown = this.countDown.bind(this);
+    this.resetRoundTimer = this.resetRoundTimer.bind(this);
+  };
 
   componentDidMount() {
     this.randomizeAnswers();
+    this.resetRoundTimer();
+  };
+
+  resetRoundTimer() {
+    let reset = this.state;
+    reset.timeRemaining = 30;
+    this.setState(reset);
+  };
+
+  startTimer() {
+    if (this.timer === 0) {
+      this.timer = setInterval(this.countDown, 1000);
+    }
   }
 
+  countDown() {
+    // Remove one second, set state so a re-render happens.
+    let seconds = this.state;
+    seconds.timeRemaining = seconds.timeRemaining - 1;
+    this.setState(seconds);
+
+    // Check if we're at zero.
+    if (seconds.timeRemaining === 0) {
+      clearInterval(this.timer);
+    }
+  }
 
   randomizeAnswers() {
     let randomizedAnswersArray = [];
@@ -46,12 +71,11 @@ class App extends React.Component {
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png' className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to On-The-Spotify</h1>
         </header>
-        <button onClick={() => {this.startCountDown();}}>Start timer</button>
-        <h2>Time remaining: {this.counter}</h2>
+        <button onClick={() => {this.startTimer();}}>Start timer</button>
+        <h2>Time remaining: {this.state.timeRemaining}</h2>
         <Switch>
           <Route exact path='/' render={()=><TestForm />} />
           <Route path="/game" render={()=><Game state={this.state} roundAnswers={this.roundAnswers}/>} />
-          <Route path="/timer" render={()=><Timer/>}/>
         </Switch>
       </div>
     );

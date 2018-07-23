@@ -117,7 +117,7 @@ export const initialState = {
   roundStart: false,
   currentRound: 0,
   roundAnswers: [],
-  roundTimer: 30,
+  timeRemaining: 0
 };
 
 export const dummyAccountEmail = "kijivinih@99pubblicita.com";
