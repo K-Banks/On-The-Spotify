@@ -4,6 +4,7 @@ import TestForm from './components/testForm';
 import { Switch, Route } from 'react-router-dom';
 import Game from './components/game/game';
 import {initialState} from './constants';
+import Timer from './components/timer/timer';
 
 class App extends React.Component {
 
@@ -13,24 +14,12 @@ class App extends React.Component {
     this.timerLeft = this.state.roundTimer;
     this.counter = 30;
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
-    this.startCountDown = this.startCountDown.bind(this);
-    this.countDown = this.countDown.bind(this);
   }
 
   componentDidMount() {
     this.randomizeAnswers();
   }
 
-  startCountDown(){
-    let start = this.state;
-    start.roundStart = true;
-    this.setState(start);
-    let timer = setInterval(this.countDown(), 1000);
-  }
-
-  countDown(){
-    console.log(this.counter);
-  }
 
   randomizeAnswers() {
     let randomizedAnswersArray = [];
@@ -62,6 +51,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' render={()=><TestForm />} />
           <Route path="/game" render={()=><Game state={this.state} roundAnswers={this.roundAnswers}/>} />
+          <Route path="/timer" render={()=><Timer/>}/>
         </Switch>
       </div>
     );
