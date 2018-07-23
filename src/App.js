@@ -1,9 +1,8 @@
 import React from 'react';
 import './App.css';
 import TestForm from './components/testForm';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import Game from './components/game/game';
-import Scoreboard from './components/Scoreboard/Scoreboard';
 import {initialState} from './constants';
 
 class App extends React.Component {
@@ -70,7 +69,9 @@ class App extends React.Component {
   goToNextRound() {
     let newState = this.state;
     newState.currentRound = newState.currentRound + 1;
-    this.setState(newState);
+    if (newState.currentRound >= 10) {
+      this.setState(newState);
+    }
     this.startTimer();
     this.randomizeAnswers();
   }
@@ -108,13 +109,13 @@ class App extends React.Component {
         <header className="App-header">
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png' className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to On-The-Spotify</h1>
+          <Link to='/'>Home</Link>
         </header>
         <h2>Time remaining: {this.state.timeRemaining}</h2>
         <Switch>
           <Route exact path='/' render={()=><TestForm startTimer={this.startTimer}/>} />
           <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer}/>} />
         </Switch>
-        <Scoreboard state={this.state}/>
       </div>
     );
   }

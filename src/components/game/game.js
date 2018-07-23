@@ -10,13 +10,9 @@ function Game(props){
   };
 
   function checkAnswer(artist) {
-    console.log('checking answer');
-    console.log(artist);
     if (artist === props.state.gameData.songData[props.state.currentRound].artistName) {
-      console.log('You are correct');
       props.stopTimer(true);
     } else {
-      console.log("Sorry, that's not right");
       props.stopTimer();
     }
   }

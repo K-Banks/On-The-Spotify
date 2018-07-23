@@ -6,20 +6,22 @@ function Scoreboard(props) {
     <div>
       <h3>This is the scoreboard</h3>
       <table>
-        <tr>
+        <tbody>
+          <tr>
           <th>Artist Name</th>
           <th>Track Name</th>
           <th>Points</th>
           <th>Answer</th>
-        </tr>
-        {props.state.gameResults.map((results, key) =>
-          <tr key={key}>
+          </tr>
+          {props.state.gameResults.map((results, key) =>
+            <tr key={key}>
             <td>{results.artist}</td>
             <td>{results.track}</td>
             <td>{results.points}</td>
             <td>{results.answerString}</td>
-          </tr>
-        )}
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>
   );
