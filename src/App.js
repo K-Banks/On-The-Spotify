@@ -10,7 +10,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = Object.assign({}, roundState);
+    this.state = roundState;
     this.timer = 0;
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
     this.startTimer = this.startTimer.bind(this);
@@ -61,15 +61,15 @@ class App extends React.Component {
   }
 
   addUserArtists(data) {
-    let roundState = this.state;
-    while (roundState.gameData.answerArtistIds.length < 5) {
+    let tempState = this.state;
+    while (tempState.gameData.answerArtistIds.length < 5) {
       let rng = Math.floor(Math.random() * 20);
-      if (roundState.gameData.answerArtistIds.includes(data.items[rng].id)) {
+      if (tempState.gameData.answerArtistIds.includes(data.items[rng].id)) {
       } else {
-        roundState.gameData.answerArtistIds.push(data.items[rng].id);
+        tempState.gameData.answerArtistIds.push(data.items[rng].id);
       }
     }
-    this.setState(roundState);
+    this.setState(tempState);
     console.log(this.state);
   }
 
@@ -92,7 +92,7 @@ class App extends React.Component {
 
   addWrongArtists(artistData) {
     let wrongArtistsArray = [];
-    let roundState = this.state;
+    let tempState = this.state;
     while (wrongArtistsArray.length < 3) {
       let rng = Math.floor(Math.random() * 20);
       if (wrongArtistsArray.includes(artistData.artists[rng].name)) {
@@ -100,13 +100,13 @@ class App extends React.Component {
         wrongArtistsArray.push(artistData.artists[rng].name);
       }
     }
-    roundState.gameData.roundAnswers = wrongArtistsArray;
-    this.setState(roundState);
+    tempState.gameData.roundAnswers = wrongArtistsArray;
+    this.setState(tempState);
   }
 
   getArtistAlbums() {
     console.log('getting albums');
-    let roundState = this.state;
+    let tempState = this.state;
     const url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/albums';
     fetch(url, {
       method: "GET",
@@ -126,8 +126,8 @@ class App extends React.Component {
           }
         }
         console.log('number of albums is: ' + numberOfAlbums);
-        roundState.gameData.songData.artistName = albumData.items[0].artists[0].name;
-        this.setState(roundState);
+        tempState.gameData.songData.artistName = albumData.items[0].artists[0].name;
+        this.setState(tempState);
         this.getRandomSong(albumData, numberOfAlbums);
       }
     )
@@ -159,11 +159,11 @@ class App extends React.Component {
     let numberOfTracks = songData.items.length;
     let rng = Math.floor(Math.random() * numberOfTracks);
     if (songData.items[rng].preview_url) {
-      let roundState = this.state;
-      roundState.gameData.songData.trackName = songData.items[rng].name;
-      roundState.gameData.songData.trackAudio = songData.items[rng].preview_url;
-      this.setState(roundState);
-      console.log(roundState);
+      let tempState = this.state;
+      tempState.gameData.songData.trackName = songData.items[rng].name;
+      tempState.gameData.songData.trackAudio = songData.items[rng].preview_url;
+      this.setState(tempState);
+      console.log(tempState);
     } else {
       this.getArtistAlbums();
     }
@@ -291,10 +291,24 @@ class App extends React.Component {
   }
 
   restartGame() {
-    console.log(roundState);
-    console.log('round state ^, new state v');
-    this.setState(roundState);
-    console.log(this.state);
+    const freshState = {
+      timeRemaining: 0,
+      userToken: '',
+      gameResults: [],
+      gameData: {
+        answerArtistIds: [],
+        songData: {
+          artistName: '',
+          trackName: '',
+          trackAudio: ''
+        },
+        roundAnswers: [],
+        gameStatus: false,
+        roundStart: false,
+        currentRound: 0
+      },
+    };
+    this.setState(freshState);
   }
 
   render() {
