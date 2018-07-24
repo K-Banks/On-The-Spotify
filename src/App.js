@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import TestForm from './components/testForm';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Game from './components/game/game';
 import Scoreboard from './components/Scoreboard/Scoreboard';
-import {roundState} from './constants';
+import { roundState } from './constants';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = roundState;
+    this.state = Object.assign({}, roundState);
     this.timer = 0;
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
     this.startTimer = this.startTimer.bind(this);
@@ -32,6 +32,7 @@ class App extends React.Component {
     this.grabUserToken = this.grabUserToken.bind(this);
     this.prepRound = this.prepRound.bind(this);
     this.endRound = this.endRound.bind(this);
+    this.restartGame = this.restartGame.bind(this);
   };
 
   grabUserToken(token) {
@@ -214,9 +215,9 @@ class App extends React.Component {
   };
 
   endGame() {
-    let game = this.state;
-    game.gameData.gameStatus = false;
-    this.setState(game);
+    let end = this.state;
+    end.gameData.gameStatus = false;
+    this.setState(end);
   };
 
   countDown() {
@@ -279,13 +280,21 @@ class App extends React.Component {
   endRound(boolean) {
     this.stopTimer();
     this.addRoundAnswer(boolean);
+    this.advanceCurrentRound();
     if (this.state.gameData.currentRound >= 5) {
-      this.endGame;
+      console.log('reached end game');
+      this.endGame();
     } else {
       this.toggleRoundStart();
-      this.advanceCurrentRound();
       this.prepRound();
     }
+  }
+
+  restartGame() {
+    console.log(roundState);
+    console.log('round state ^, new state v');
+    this.setState(roundState);
+    console.log(this.state);
   }
 
   render() {
@@ -294,11 +303,10 @@ class App extends React.Component {
         <header className="App-header">
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png' className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to On-The-Spotify</h1>
-          <Link to='/'>Home</Link>
         </header>
         <Switch>
           <Route exact path='/' render={()=><TestForm grabUserToken={this.grabUserToken} gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
-          <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart}/>} />
+          <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
         </Switch>
         <Scoreboard state={this.state}/>
       </div>

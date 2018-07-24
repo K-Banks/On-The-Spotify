@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactAudioPlayer from 'react-audio-player';
 import RoundStart from './../RoundStart/RoundStart';
 import GameState from './../GameState/GameState';
+import EndGame from './../EndGame/EndGame';
 
 function Game(props){
   function logState() {
@@ -19,10 +20,6 @@ function Game(props){
 
   if (props.state.gameData.gameStatus && props.state.gameData.roundStart) {
     return(
-      <GameState />
-    );
-  } else if (props.state.gameData.roundStart) {
-    return(
       <div>
         <h1>Which artist wrote this song?</h1>
         <h2>Time remaining: {props.state.timeRemaining}</h2>
@@ -36,13 +33,26 @@ function Game(props){
         />
       </div>
     );
-  } else if (props.state.gameData.gameStatus === false) {
+  } else if (props.state.gameData.gameStatus && props.state.gameData.roundStart === false) {
     return(
-      <GameState/>
+      <div>
+        <button onClick={() => {logState();}}>Press button to print state to console.</button>
+        <RoundStart state={props.state} toggleRoundStart={props.toggleRoundStart}/>
+      </div>
     );
+  } else if (props.state.gameData.gameStatus===false && props.state.gameResults.length>=5) {
+      return(
+        <div>
+          <button onClick={() => {logState();}}>Press button to print state to console.</button>
+          <EndGame state={props.state} restartGame={props.restartGame}/>
+        </div>
+      );
   } else {
     return(
-      <RoundStart state={props.state} toggleRoundStart={props.toggleRoundStart}/>
+      <div>
+        <GameState/>
+        <button onClick={() => {logState();}}>Press button to print state to console.</button>
+      </div>
     );
   }
 }
@@ -50,7 +60,8 @@ function Game(props){
   Game.propTypes = {
     state: PropTypes.object,
     endRound: PropTypes.func,
-    toggleRoundStart: PropTypes.func
+    toggleRoundStart: PropTypes.func,
+    restartGame: PropTypes.func
   }
 
 export default Game;
