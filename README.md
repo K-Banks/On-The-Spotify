@@ -33,7 +33,7 @@ _This app is a music quiz using the Spotify API and user data to create a person
     * request top tracks:
       * pick random song, store track name, artist name, and preview url
 * Example state object:
-state: { 
+state: {
   game results: {
     answerResults: [boolean, boolean, ..., boolean],
     answerPoints: [#, #, ..., #]
