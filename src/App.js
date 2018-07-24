@@ -5,7 +5,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import Game from './components/game/game';
 import Scoreboard from './components/Scoreboard/Scoreboard';
 import Test from './components/test';
-import {initialState, roundState} from './constants';
+import {roundState} from './constants';
 
 class App extends React.Component {
 
@@ -30,7 +30,14 @@ class App extends React.Component {
     this.getArtistAlbums = this.getArtistAlbums.bind(this);
     this.getRandomSong = this.getRandomSong.bind(this);
     this.addRandomSong = this.addRandomSong.bind(this);
+    this.grabUserToken = this.grabUserToken.bind(this);
   };
+
+  grabUserToken(token) {
+    let newState = this.state;
+    newState.userToken = token;
+    this.setState(newState);
+  }
 
   scrapeUserData() {
     console.log('scraping data');
@@ -39,13 +46,14 @@ class App extends React.Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + this.state.userAuth
+        "Authorization": "Bearer " + this.state.userToken
       }
     }).then(
       response => response.json()
     ).then(
       data => {
-        addUserArtists(data);
+        console.log(data);
+        this.addUserArtists(data);
       }
     )
   }
@@ -60,6 +68,7 @@ class App extends React.Component {
       }
     }
     this.setState(roundState);
+    console.log(this.state);
   }
 
   getWrongArtists() {
@@ -68,13 +77,13 @@ class App extends React.Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + this.state.userAuth
+        "Authorization": "Bearer " + this.state.userToken
       }
     }).then(
       response => response.json()
     ).then(
       artistData=>{
-        addWrongArtists(artistData);
+        this.addWrongArtists(artistData);
       }
     )
   }
@@ -101,7 +110,7 @@ class App extends React.Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + this.state.userAuth
+        "Authorization": "Bearer " + this.state.userToken
       }
     }).then(
       response => response.json()
@@ -117,7 +126,7 @@ class App extends React.Component {
         console.log('number of albums is: ' + numberOfAlbums);
         roundState.gameData.songData.artistName = albumData.items[0].artists[0].name;
         this.setState(roundState);
-        getRandomSong(albumData, numberOfAlbums);
+        this.getRandomSong(albumData, numberOfAlbums);
       }
     )
   }
@@ -131,7 +140,7 @@ class App extends React.Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + this.state.userAuth
+        "Authorization": "Bearer " + this.state.userToken
       }
     }).then(
       response => response.json()
@@ -139,7 +148,7 @@ class App extends React.Component {
       songData => {
         console.log('song data');
         console.log(songData);
-        addRandomSong(songData);
+        this.addRandomSong(songData);
       }
     )
   }
@@ -266,7 +275,7 @@ class App extends React.Component {
           <Link to='/'>Home</Link>
         </header>
         <Switch>
-          <Route exact path='/' render={()=><TestForm gameStart={this.gameStart} state={this.state}/>} />
+          <Route exact path='/' render={()=><TestForm grabUserToken={this.grabUserToken} gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer} toggleRoundStart={this.toggleRoundStart} endGame={this.endGame}/>} />
           <Route path="/test" render={()=><Test/>}/>
         </Switch>

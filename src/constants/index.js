@@ -121,7 +121,7 @@ export const initialState = {
 
 export const roundState = {
   timeRemaining: 0,
-  userToken: 'BQBz2trOY4HV4-Du96pEY0R5Vl2gBlff1X0291iro8kaRVNLBkUArForgmHYjyC2A5niN-1i7ZE8v54Ax7LIlHvwyaMrpMTnCKXhD_mFMgOzcHEtlLjvpxGSo7hgU1FsM0_QxeQfbdf560IuFJOBdkLXbg',
+  userToken: '',
   gameResults: [],
   gameData: {
     answerArtistIds: [],
@@ -135,8 +135,6 @@ export const roundState = {
     roundStart: false,
     currentRound: 0
   },
-  timeRemaining: 0,
-  userAuth: ''
 }
 
 export const dummyAccountEmail = "kijivinih@99pubblicita.com";
