@@ -4,9 +4,11 @@ function Test(){
   let object = {
     artists: [],
     artistId: [],
-    wrongArtists: []
+    wrongArtists: [],
+    songName: [],
+    songURL: []
   };
-  const apiKey = 'BQA4lClYwOfsUP7dPpOddFghUhSH_AaC86_cqJ-Q6--2smV9NbUYxDrnma4sZQq340H7KpRXXERxU9JJMn8EjxbAAC9_G4PlweeAQOrFeJiRg3j3_-z8DML__xQE6Ph1tIIfabV5sZzi-V6RgIz00Gl5RA';
+  const apiKey = 'BQBDGN81umm-8186MZBIRvcLTZ-QZTxs7L0xTQl2Hmf1Em5rYyQLYwbnJe19-4bp6Uk5RxlmqXEnXGCxnST2z1yOzO_wB6zTBfv_5ze6Jg4oAXwHjt23ohbgLIgNvKl0YEeXrn92biYWJ8wcVDeLfp1xgA';
 
   function logger() {
     console.log('you clicked the test');
@@ -26,24 +28,21 @@ function Test(){
       response => response.json()
     ).then(
       data => {
-        console.log(data);
-        console.log(data.items);
         addUserArtists(data);
       }
     )
   }
 
   function addUserArtists(data) {
-    while (object.artists.length < 10) {
+    while (object.artists.length < 5) {
       let rng = Math.floor(Math.random() * 20);
       if (object.artists.includes(data.items[rng].name)) {
-        console.log('nope');
       } else {
         object.artists.push(data.items[rng].name);
         object.artistId.push(data.items[rng].id);
         getWrongArtists(data.items[rng].id);
+        getArtistAlbums(data.items[rng].id);
       }
-      console.log(object);
     }
   }
 
@@ -59,7 +58,6 @@ function Test(){
       response => response.json()
     ).then(
       artistData=>{
-        console.log(artistData);
         addWrongArtists(artistData);
       }
     )
@@ -70,13 +68,67 @@ function Test(){
     while (wrongArtistsArray.length < 3) {
       let rng = Math.floor(Math.random() * 20);
       if (wrongArtistsArray.includes(artistData.artists[rng].name)) {
-        console.log('nope');
       } else {
         wrongArtistsArray.push(artistData.artists[rng].name);
       }
-      console.log(object);
     }
     object.wrongArtists.push(wrongArtistsArray);
+  }
+
+  function getArtistAlbums(artistId) {
+    console.log('getting albums');
+    const url = 'https://api.spotify.com/v1/artists/' + artistId + '/albums';
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + apiKey
+      }
+    }).then(
+      response => response.json()
+    ).then(
+      albumData => {
+        let numberOfAlbums = 0;
+        console.log(albumData);
+        for (var i = 0; i < albumData.items.length; i++) {
+          if (albumData.items[i].album_type === "album") {
+            numberOfAlbums += 1;
+          }
+        }
+        console.log('number of albums is: ' + numberOfAlbums);
+        getRandomSong(albumData, numberOfAlbums)
+      }
+    )
+  }
+
+  function getRandomSong(albumData, numberOfAlbums) {
+    let rng = Math.floor(Math.random() * numberOfAlbums);
+    let albumSelection = albumData.items[rng].id;
+    console.log(albumSelection);
+    const url = 'https://api.spotify.com/v1/albums/' + albumSelection + '/tracks';
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + apiKey
+      }
+    }).then(
+      response => response.json()
+    ).then(
+      songData => {
+        console.log('song data');
+        console.log(songData);
+        addRandomSong(songData);
+      }
+    )
+  }
+
+  function addRandomSong(songData) {
+    let numberOfTracks = songData.items.length;
+    let rng = Math.floor(Math.random() * numberOfTracks);
+    object.songName.push(songData.items[rng].name);
+    object.songURL.push(songData.items[rng].preview_url);
+    console.log(object);
   }
 
   return(
