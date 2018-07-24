@@ -42,7 +42,6 @@ class App extends React.Component {
   }
 
   scrapeUserData() {
-    console.log('scraping data');
     const url = 'https://api.spotify.com/v1/me/top/artists';
     fetch(url, {
       method: "GET",
@@ -54,7 +53,6 @@ class App extends React.Component {
       response => response.json()
     ).then(
       data => {
-        console.log(data);
         this.addUserArtists(data);
       }
     )
@@ -70,7 +68,6 @@ class App extends React.Component {
       }
     }
     this.setState(tempState);
-    console.log(this.state);
   }
 
   getWrongArtists() {
@@ -105,7 +102,6 @@ class App extends React.Component {
   }
 
   getArtistAlbums() {
-    console.log('getting albums');
     let tempState = this.state;
     const url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/albums';
     fetch(url, {
@@ -119,13 +115,11 @@ class App extends React.Component {
     ).then(
       albumData => {
         let numberOfAlbums = 0;
-        console.log(albumData);
         for (var i = 0; i < albumData.items.length; i++) {
           if (albumData.items[i].album_type === "album") {
             numberOfAlbums += 1;
           }
         }
-        console.log('number of albums is: ' + numberOfAlbums);
         tempState.gameData.songData.artistName = albumData.items[0].artists[0].name;
         this.setState(tempState);
         this.getRandomSong(albumData, numberOfAlbums);
@@ -136,7 +130,6 @@ class App extends React.Component {
   getRandomSong(albumData, numberOfAlbums) {
     let rng = Math.floor(Math.random() * numberOfAlbums);
     let albumSelection = albumData.items[rng].id;
-    console.log(albumSelection);
     const url = 'https://api.spotify.com/v1/albums/' + albumSelection + '/tracks';
     fetch(url, {
       method: "GET",
@@ -148,8 +141,6 @@ class App extends React.Component {
       response => response.json()
     ).then(
       songData => {
-        console.log('song data');
-        console.log(songData);
         this.addRandomSong(songData);
       }
     )
@@ -163,7 +154,6 @@ class App extends React.Component {
       tempState.gameData.songData.trackName = songData.items[rng].name;
       tempState.gameData.songData.trackAudio = songData.items[rng].preview_url;
       this.setState(tempState);
-      console.log(tempState);
     } else {
       this.getArtistAlbums();
     }
@@ -282,7 +272,6 @@ class App extends React.Component {
     this.addRoundAnswer(boolean);
     this.advanceCurrentRound();
     if (this.state.gameData.currentRound >= 5) {
-      console.log('reached end game');
       this.endGame();
     } else {
       this.toggleRoundStart();
