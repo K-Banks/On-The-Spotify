@@ -5,13 +5,13 @@ import { Switch, Route, Link } from 'react-router-dom';
 import Game from './components/game/game';
 import Scoreboard from './components/Scoreboard/Scoreboard';
 import Test from './components/test';
-import {initialState} from './constants';
+import {initialState, roundState} from './constants';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = initialState;
+    this.state = roundState;
     this.timer = 0;
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
     this.startTimer = this.startTimer.bind(this);
@@ -24,30 +24,26 @@ class App extends React.Component {
     this.gameStart = this.gameStart.bind(this);
     this.endGame = this.endGame.bind(this);
   };
-//refactor for round
-  componentDidMount() {
-    this.randomizeAnswers();
-  };
-//refactor for round
+
   resetRoundTimer() {
     let reset = this.state;
     reset.timeRemaining = 30;
     this.setState(reset);
   };
-//refactor for round
+
   startTimer() {
     this.resetRoundTimer();
     if (this.timer === 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
   }
-//refactor for round
+
   stopTimer(boolean) {
     this.addRoundAnswer(boolean);
     clearInterval(this.timer);
     this.timer = 0;
   }
-//refactor for round
+
   addRoundAnswer(boolean) {
     let newState = this.state;
     let score;
@@ -70,21 +66,21 @@ class App extends React.Component {
     this.setState(newState);
     this.toggleRoundStart();
   }
-//refactor for round
+
   goToNextRound() {
     let newState = this.state;
-    newState.currentRound = newState.currentRound + 1;
+    newState.gameData.currentRound = newState.gameData.currentRound + 1;
     this.setState(newState);
     this.startTimer();
     this.randomizeAnswers();
   };
-//refactor for round
+
   endGame() {
     let game = this.state;
-    game.gameStatus = false;
+    game.gameData.gameStatus = false;
     this.setState(game);
   };
-//refactor for round
+
   countDown() {
     let seconds = this.state;
     seconds.timeRemaining = seconds.timeRemaining - 1;
@@ -93,13 +89,13 @@ class App extends React.Component {
       clearInterval(this.timer);
     }
   }
-//refactor for round
+
   randomizeAnswers() {
     let randomizedAnswersArray = [];
-    let answer1 = this.state.gameData.songData[this.state.currentRound].artistName;
-    let answer2 = this.state.gameData.wrongArtistNames[this.state.currentRound][0];
-    let answer3 = this.state.gameData.wrongArtistNames[this.state.currentRound][1];
-    let answer4 = this.state.gameData.wrongArtistNames[this.state.currentRound][2];
+    let answer1 = this.state.gameData.songData.artistName;
+    let answer2 = this.state.gameData.roundAnswers[0];
+    let answer3 = this.state.gameData.roundAnswers[1];
+    let answer4 = this.state.gameData.roundAnswers[2];
     const answerArray = [answer1, answer2, answer3, answer4];
     while (randomizedAnswersArray.length < 4) {
       let selection = Math.floor(Math.random() * 4);
@@ -107,27 +103,27 @@ class App extends React.Component {
         randomizedAnswersArray.push(answerArray[selection]);
       }
     }
-    let newState = Object.assign({}, this.state);
-    newState.roundAnswers = randomizedAnswersArray;
+    let newState = this.state;
+    newState.gameData.roundAnswers = randomizedAnswersArray;
     this.setState(newState);
   };
-//refactor for round
+
   toggleRoundStart() {
     let toggle = this.state;
-    if (toggle.roundStart) {
-      toggle.roundStart = false;
+    if (toggle.gameData.roundStart) {
+      toggle.gameData.roundStart = false;
       this.setState(toggle);
     } else {
-      toggle.roundStart = true;
+      toggle.gameData.roundStart = true;
       this.setState(toggle);
       this.goToNextRound();
     }
   }
-//refactor for round
+
   gameStart(){
     let game = this.state;
-    game.gameStatus = true;
-    game.roundStart = true;
+    game.gameData.gameStatus = true;
+    game.gameData.roundStart = true;
     this.setState(game);
     this.startTimer();
   }
