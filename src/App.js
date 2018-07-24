@@ -23,7 +23,136 @@ class App extends React.Component {
     this.toggleRoundStart = this.toggleRoundStart.bind(this);
     this.gameStart = this.gameStart.bind(this);
     this.endGame = this.endGame.bind(this);
+    this.scrapeUserData = this.scrapeUserData.bind(this);
+    this.addUserArtists = this.addUserArtists.bind(this);
+    this.getWrongArtists = this.getWrongArtists.bind(this);
+    this.addWrongArtists = this.addWrongArtists.bind(this);
+    this.getArtistAlbums = this.getArtistAlbums.bind(this);
+    this.getRandomSong = this.getRandomSong.bind(this);
+    this.addRandomSong = this.addRandomSong.bind(this);
   };
+
+  scrapeUserData() {
+    console.log('scraping data');
+    const url = 'https://api.spotify.com/v1/me/top/artists';
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + this.state.userAuth
+      }
+    }).then(
+      response => response.json()
+    ).then(
+      data => {
+        addUserArtists(data);
+      }
+    )
+  }
+
+  addUserArtists(data) {
+    let roundState = this.state;
+    while (roundState.gameData.answerArtistIds.length < 5) {
+      let rng = Math.floor(Math.random() * 20);
+      if (roundState.gameData.answerArtistIds.includes(data.items[rng].name)) {
+      } else {
+        roundState.gameData.answerArtistIds.push(data.items[rng].id);
+      }
+    }
+    this.setState(roundState);
+  }
+
+  getWrongArtists() {
+    let url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[0] + '/related-artists';
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + this.state.userAuth
+      }
+    }).then(
+      response => response.json()
+    ).then(
+      artistData=>{
+        addWrongArtists(artistData);
+      }
+    )
+  }
+
+  addWrongArtists(artistData) {
+    let wrongArtistsArray = [];
+    let roundState = this.state;
+    while (wrongArtistsArray.length < 3) {
+      let rng = Math.floor(Math.random() * 20);
+      if (wrongArtistsArray.includes(artistData.artists[rng].name)) {
+      } else {
+        wrongArtistsArray.push(artistData.artists[rng].name);
+      }
+    }
+    roundState.gameData.roundAnswers = wrongArtistsArray;
+    this.setState(roundState);
+  }
+
+  getArtistAlbums() {
+    console.log('getting albums');
+    let roundState = this.state;
+    const url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/albums';
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + this.state.userAuth
+      }
+    }).then(
+      response => response.json()
+    ).then(
+      albumData => {
+        let numberOfAlbums = 0;
+        console.log(albumData);
+        for (var i = 0; i < albumData.items.length; i++) {
+          if (albumData.items[i].album_type === "album") {
+            numberOfAlbums += 1;
+          }
+        }
+        console.log('number of albums is: ' + numberOfAlbums);
+        roundState.gameData.songData.artistName = albumData.items[0].artists[0].name;
+        this.setState(roundState);
+        getRandomSong(albumData, numberOfAlbums);
+      }
+    )
+  }
+
+  getRandomSong(albumData, numberOfAlbums) {
+    let rng = Math.floor(Math.random() * numberOfAlbums);
+    let albumSelection = albumData.items[rng].id;
+    console.log(albumSelection);
+    const url = 'https://api.spotify.com/v1/albums/' + albumSelection + '/tracks';
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + this.state.userAuth
+      }
+    }).then(
+      response => response.json()
+    ).then(
+      songData => {
+        console.log('song data');
+        console.log(songData);
+        addRandomSong(songData);
+      }
+    )
+  }
+
+  addRandomSong(songData) {
+    let roundState = this.state;
+    let numberOfTracks = songData.items.length;
+    let rng = Math.floor(Math.random() * numberOfTracks);
+    roundState.gameData.songData.trackName = songData.items[rng].name;
+    roundState.gameData.songData.trackAudio = songData.items[rng].preview_url;
+    this.setState(roundState);
+    console.log(roundState);
+  }
 
   resetRoundTimer() {
     let reset = this.state;
