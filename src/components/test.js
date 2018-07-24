@@ -1,14 +1,9 @@
 import React from 'react';
+import {roundState} from './../constants';
 
 function Test(){
-  let object = {
-    artists: [],
-    artistId: [],
-    wrongArtists: [],
-    songName: [],
-    songURL: []
-  };
-  const apiKey = 'BQBDGN81umm-8186MZBIRvcLTZ-QZTxs7L0xTQl2Hmf1Em5rYyQLYwbnJe19-4bp6Uk5RxlmqXEnXGCxnST2z1yOzO_wB6zTBfv_5ze6Jg4oAXwHjt23ohbgLIgNvKl0YEeXrn92biYWJ8wcVDeLfp1xgA';
+  let object = roundState;
+  const apiKey = 'BQBz2trOY4HV4-Du96pEY0R5Vl2gBlff1X0291iro8kaRVNLBkUArForgmHYjyC2A5niN-1i7ZE8v54Ax7LIlHvwyaMrpMTnCKXhD_mFMgOzcHEtlLjvpxGSo7hgU1FsM0_QxeQfbdf560IuFJOBdkLXbg';
 
   function logger() {
     console.log('you clicked the test');
@@ -34,20 +29,19 @@ function Test(){
   }
 
   function addUserArtists(data) {
-    while (object.artists.length < 5) {
+    while (object.gameData.answerArtistIds.length < 5) {
       let rng = Math.floor(Math.random() * 20);
-      if (object.artists.includes(data.items[rng].name)) {
+      if (object.gameData.answerArtistIds.includes(data.items[rng].name)) {
       } else {
-        object.artists.push(data.items[rng].name);
-        object.artistId.push(data.items[rng].id);
-        getWrongArtists(data.items[rng].id);
-        getArtistAlbums(data.items[rng].id);
+        object.gameData.answerArtistIds.push(data.items[rng].id);
       }
     }
+    getWrongArtists(data.items[object.gameData.currentRound].id);
+    getArtistAlbums(data.items[object.gameData.currentRound].id);
   }
 
   function getWrongArtists() {
-    let url = 'https://api.spotify.com/v1/artists/' + object.artistId[0] + '/related-artists';
+    let url = 'https://api.spotify.com/v1/artists/' + object.gameData.answerArtistIds[0] + '/related-artists';
     fetch(url, {
       method: "GET",
       headers: {
@@ -72,7 +66,7 @@ function Test(){
         wrongArtistsArray.push(artistData.artists[rng].name);
       }
     }
-    object.wrongArtists.push(wrongArtistsArray);
+    object.gameData.roundAnswers = wrongArtistsArray;
   }
 
   function getArtistAlbums(artistId) {
@@ -96,6 +90,7 @@ function Test(){
           }
         }
         console.log('number of albums is: ' + numberOfAlbums);
+        object.gameData.songData.artistName = albumData.items[0].artists[0].name;
         getRandomSong(albumData, numberOfAlbums)
       }
     )
@@ -126,8 +121,8 @@ function Test(){
   function addRandomSong(songData) {
     let numberOfTracks = songData.items.length;
     let rng = Math.floor(Math.random() * numberOfTracks);
-    object.songName.push(songData.items[rng].name);
-    object.songURL.push(songData.items[rng].preview_url);
+    object.gameData.songData.trackName = songData.items[rng].name;
+    object.gameData.songData.trackAudio = songData.items[rng].preview_url;
     console.log(object);
   }
 
