@@ -19,7 +19,7 @@ class App extends React.Component {
     this.resetRoundTimer = this.resetRoundTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.addRoundAnswer = this.addRoundAnswer.bind(this);
-    this.goToNextRound = this.goToNextRound.bind(this);
+    this.startNextRound = this.startNextRound.bind(this);
     this.toggleRoundStart = this.toggleRoundStart.bind(this);
     this.gameStart = this.gameStart.bind(this);
     this.endGame = this.endGame.bind(this);
@@ -31,6 +31,7 @@ class App extends React.Component {
     this.getRandomSong = this.getRandomSong.bind(this);
     this.addRandomSong = this.addRandomSong.bind(this);
     this.grabUserToken = this.grabUserToken.bind(this);
+    this.prepRound = this.prepRound.bind(this);
   };
 
   grabUserToken(token) {
@@ -72,7 +73,7 @@ class App extends React.Component {
   }
 
   getWrongArtists() {
-    let url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[0] + '/related-artists';
+    let url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/related-artists';
     fetch(url, {
       method: "GET",
       headers: {
@@ -205,10 +206,7 @@ class App extends React.Component {
     this.toggleRoundStart();
   }
 
-  goToNextRound() {
-    let newState = this.state;
-    newState.gameData.currentRound = newState.gameData.currentRound + 1;
-    this.setState(newState);
+  startNextRound() {
     this.startTimer();
     this.randomizeAnswers();
   };
@@ -254,16 +252,20 @@ class App extends React.Component {
     } else {
       toggle.gameData.roundStart = true;
       this.setState(toggle);
-      this.goToNextRound();
+      this.startNextRound();
     }
   }
 
   gameStart(){
     let game = this.state;
     game.gameData.gameStatus = true;
-    game.gameData.roundStart = true;
     this.setState(game);
-    this.startTimer();
+    this.prepRound();
+  }
+
+  prepRound() {
+    this.getWrongArtists();
+    this.getArtistAlbums();
   }
 
   render() {

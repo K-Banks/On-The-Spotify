@@ -7,9 +7,12 @@ function TestForm(props) {
 
   function handleNewTokenSubmission(event){
     event.preventDefault();
-    props.grabUserToken(_token.value);
-    _token.value = '';
-    props.scrapeUserData();
+    if (_token.value !== '' && _token.value.length > 150) {
+      props.grabUserToken(_token.value);
+      props.scrapeUserData();
+    } else {
+      _token.value = 'Please use valid token';
+    }
   }
 
   if (props.state.userToken !== '') {
