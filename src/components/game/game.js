@@ -11,16 +11,13 @@ function Game(props){
 
   function checkAnswer(artist) {
     if (artist === props.state.gameData.songData.artistName) {
-      props.stopTimer(true);
+      props.endRound(true);
     } else {
-      props.stopTimer();
-    }
-    if (props.state.gameData.currentRound >= 5) {
-      props.endGame();
+      props.endRound();
     }
   }
 
-  if (props.state.gameData.gameStatus === false) {
+  if (props.state.gameData.gameStatus && props.state.gameData.roundStart) {
     return(
       <GameState />
     );
@@ -39,6 +36,10 @@ function Game(props){
         />
       </div>
     );
+  } else if (props.state.gameData.gameStatus === false) {
+    return(
+      <GameState/>
+    );
   } else {
     return(
       <RoundStart state={props.state} toggleRoundStart={props.toggleRoundStart}/>
@@ -48,9 +49,7 @@ function Game(props){
 
   Game.propTypes = {
     state: PropTypes.object,
-    roundAnswers: PropTypes.array,
-    startTimer: PropTypes.func,
-    stopTimer: PropTypes.func,
+    endRound: PropTypes.func,
     toggleRoundStart: PropTypes.func
   }
 

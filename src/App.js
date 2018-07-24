@@ -32,6 +32,7 @@ class App extends React.Component {
     this.addRandomSong = this.addRandomSong.bind(this);
     this.grabUserToken = this.grabUserToken.bind(this);
     this.prepRound = this.prepRound.bind(this);
+    this.endRound = this.endRound.bind(this);
   };
 
   grabUserToken(token) {
@@ -63,7 +64,7 @@ class App extends React.Component {
     let roundState = this.state;
     while (roundState.gameData.answerArtistIds.length < 5) {
       let rng = Math.floor(Math.random() * 20);
-      if (roundState.gameData.answerArtistIds.includes(data.items[rng].name)) {
+      if (roundState.gameData.answerArtistIds.includes(data.items[rng].id)) {
       } else {
         roundState.gameData.answerArtistIds.push(data.items[rng].id);
       }
@@ -155,13 +156,17 @@ class App extends React.Component {
   }
 
   addRandomSong(songData) {
-    let roundState = this.state;
     let numberOfTracks = songData.items.length;
     let rng = Math.floor(Math.random() * numberOfTracks);
-    roundState.gameData.songData.trackName = songData.items[rng].name;
-    roundState.gameData.songData.trackAudio = songData.items[rng].preview_url;
-    this.setState(roundState);
-    console.log(roundState);
+    if (songData.items[rng].preview_url) {
+      let roundState = this.state;
+      roundState.gameData.songData.trackName = songData.items[rng].name;
+      roundState.gameData.songData.trackAudio = songData.items[rng].preview_url;
+      this.setState(roundState);
+      console.log(roundState);
+    } else {
+      this.getArtistAlbums();
+    }
   }
 
   resetRoundTimer() {
@@ -177,8 +182,7 @@ class App extends React.Component {
     }
   }
 
-  stopTimer(boolean) {
-    this.addRoundAnswer(boolean);
+  stopTimer() {
     clearInterval(this.timer);
     this.timer = 0;
   }
@@ -203,7 +207,6 @@ class App extends React.Component {
     }
     newState.gameResults.push(roundData);
     this.setState(newState);
-    this.toggleRoundStart();
   }
 
   startNextRound() {
@@ -256,6 +259,12 @@ class App extends React.Component {
     }
   }
 
+  advanceCurrentRound() {
+    let newRound = this.state;
+    newRound.gameData.currentRound += 1;
+    this.setState(newRound);
+  }
+
   gameStart(){
     let game = this.state;
     game.gameData.gameStatus = true;
@@ -268,6 +277,18 @@ class App extends React.Component {
     this.getArtistAlbums();
   }
 
+  endRound(boolean) {
+    this.stopTimer();
+    this.addRoundAnswer(boolean);
+    if (this.state.gameData.currentRound >= 5) {
+      this.endGame;
+    } else {
+      this.toggleRoundStart();
+      this.advanceCurrentRound();
+      this.prepRound();
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -278,7 +299,7 @@ class App extends React.Component {
         </header>
         <Switch>
           <Route exact path='/' render={()=><TestForm grabUserToken={this.grabUserToken} gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
-          <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer} toggleRoundStart={this.toggleRoundStart} endGame={this.endGame}/>} />
+          <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart}/>} />
           <Route path="/test" render={()=><Test/>}/>
         </Switch>
         <Scoreboard state={this.state}/>
