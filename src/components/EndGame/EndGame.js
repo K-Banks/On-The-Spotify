@@ -13,8 +13,7 @@ function EndGame(props){
 
   return(
     <div>
-      <h1>This is the end game screen</h1>
-      <h3>You scored {totalScore} points out of 150</h3>
+      <h1>You scored {totalScore} points out of 150</h1>
       <Link onClick={()=>{props.restartGame();}} to='/'>Home</Link>
     </div>
 

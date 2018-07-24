@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function TestForm(props) {
+function SignIn(props) {
   let _token = null;
 
   function handleNewTokenSubmission(event){
@@ -38,11 +38,11 @@ function TestForm(props) {
   }
 }
 
-TestForm.propTypes = {
+SignIn.propTypes = {
   gameStart: PropTypes.func,
   scrapeUserData: PropTypes.func,
   state: PropTypes.object,
   grabUserToken: PropTypes.func
 }
 
-export default TestForm;
+export default SignIn;

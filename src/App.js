@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
-import TestForm from './components/testForm';
+import SignIn from './components/SignIn/SignIn';
 import { Switch, Route } from 'react-router-dom';
 import Game from './components/game/game';
 import Scoreboard from './components/Scoreboard/Scoreboard';
+import Header from './components/Header/Header';
 import { roundState } from './constants';
 
 class App extends React.Component {
@@ -307,8 +308,9 @@ class App extends React.Component {
           <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/168px-Spotify_logo_without_text.svg.png' className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to On-The-Spotify</h1>
         </header>
+        <Header/>
         <Switch>
-          <Route exact path='/' render={()=><TestForm grabUserToken={this.grabUserToken} gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
+          <Route exact path='/' render={()=><SignIn grabUserToken={this.grabUserToken} gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
         </Switch>
         <Scoreboard state={this.state}/>
