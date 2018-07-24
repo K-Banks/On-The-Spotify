@@ -24,30 +24,30 @@ class App extends React.Component {
     this.gameStart = this.gameStart.bind(this);
     this.endGame = this.endGame.bind(this);
   };
-
+//refactor for round
   componentDidMount() {
     this.randomizeAnswers();
   };
-
+//refactor for round
   resetRoundTimer() {
     let reset = this.state;
     reset.timeRemaining = 30;
     this.setState(reset);
   };
-
+//refactor for round
   startTimer() {
     this.resetRoundTimer();
     if (this.timer === 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
   }
-
+//refactor for round
   stopTimer(boolean) {
     this.addRoundAnswer(boolean);
     clearInterval(this.timer);
     this.timer = 0;
   }
-
+//refactor for round
   addRoundAnswer(boolean) {
     let newState = this.state;
     let score;
@@ -70,7 +70,7 @@ class App extends React.Component {
     this.setState(newState);
     this.toggleRoundStart();
   }
-
+//refactor for round
   goToNextRound() {
     let newState = this.state;
     newState.currentRound = newState.currentRound + 1;
@@ -78,13 +78,13 @@ class App extends React.Component {
     this.startTimer();
     this.randomizeAnswers();
   };
-
+//refactor for round
   endGame() {
     let game = this.state;
     game.gameStatus = false;
     this.setState(game);
   };
-
+//refactor for round
   countDown() {
     let seconds = this.state;
     seconds.timeRemaining = seconds.timeRemaining - 1;
@@ -93,7 +93,7 @@ class App extends React.Component {
       clearInterval(this.timer);
     }
   }
-
+//refactor for round
   randomizeAnswers() {
     let randomizedAnswersArray = [];
     let answer1 = this.state.gameData.songData[this.state.currentRound].artistName;
@@ -111,7 +111,7 @@ class App extends React.Component {
     newState.roundAnswers = randomizedAnswersArray;
     this.setState(newState);
   };
-
+//refactor for round
   toggleRoundStart() {
     let toggle = this.state;
     if (toggle.roundStart) {
@@ -123,7 +123,7 @@ class App extends React.Component {
       this.goToNextRound();
     }
   }
-
+//refactor for round
   gameStart(){
     let game = this.state;
     game.gameStatus = true;
