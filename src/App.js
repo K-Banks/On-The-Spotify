@@ -141,7 +141,7 @@ class App extends React.Component {
           <Link to='/'>Home</Link>
         </header>
         <Switch>
-          <Route exact path='/' render={()=><TestForm gameStart={this.gameStart}/>} />
+          <Route exact path='/' render={()=><TestForm gameStart={this.gameStart} state={this.state}/>} />
           <Route path="/game" render={()=><Game state={this.state} stopTimer={this.stopTimer} roundAnswers={this.roundAnswers} startTimer={this.startTimer} toggleRoundStart={this.toggleRoundStart} endGame={this.endGame}/>} />
           <Route path="/test" render={()=><Test/>}/>
         </Switch>
