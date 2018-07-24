@@ -195,8 +195,8 @@ class App extends React.Component {
       rightWrong = 'Wrong';
     }
     let roundData = {
-      artist: newState.gameData.songData[newState.currentRound].artistName,
-      track: newState.gameData.songData[newState.currentRound].trackName,
+      artist: newState.gameData.songData.artistName,
+      track: newState.gameData.songData.trackName,
       correct: boolean,
       points: score,
       answerString: rightWrong
