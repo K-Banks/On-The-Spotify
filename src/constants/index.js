@@ -1,9 +1,6 @@
 export const REQUEST = 'REQUEST';
 export const initialState = {
-  gameResults: {
-    answerResults: [],
-    answerPoints: []
-  },
+  gameResults: [],
   gameData: {
     answerArtists: ['7Ln80lUS6He07XvHI8qqHH', '5a2EaR3hamoenG9rDuVn8j', '0O0lrN34wrcuBenkqlEDZe', '06HL4z0CvFAxyc27GXpf02', '08GQAI4eElDnROBrJRGE0X', '1dfeR4HaWDbWqFHLkxsg1d', '3WrFJ7ztbogyGnTHbHJFl2', '7guDJrEfX3qb6FEbdPA5qi', '6vWDO969PvNqNYHIOW5v0m', '0oSGxfWSnnOXhD2fKuz2Gy'],
     songData: [
@@ -117,7 +114,9 @@ export const initialState = {
   roundStart: false,
   currentRound: 0,
   roundAnswers: [],
-  roundTimer: 30,
+  timeRemaining: 0,
+  gameStatus: false,
+  test: 'hello this is test'
 };
 
 export const dummyAccountEmail = "kijivinih@99pubblicita.com";
