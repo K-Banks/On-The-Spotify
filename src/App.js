@@ -4,7 +4,6 @@ import TestForm from './components/testForm';
 import { Switch, Route, Link } from 'react-router-dom';
 import Game from './components/game/game';
 import Scoreboard from './components/Scoreboard/Scoreboard';
-import Test from './components/test';
 import {roundState} from './constants';
 
 class App extends React.Component {
@@ -300,7 +299,6 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' render={()=><TestForm grabUserToken={this.grabUserToken} gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart}/>} />
-          <Route path="/test" render={()=><Test/>}/>
         </Switch>
         <Scoreboard state={this.state}/>
       </div>
