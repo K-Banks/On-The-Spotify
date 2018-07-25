@@ -7,3 +7,7 @@
 .homeLink:hover {
   background-color: #12ab4a;
 }
+
+.endGameStyle h1:hover {
+  cursor: default;
+}

@@ -24,15 +24,19 @@ function Game(props){
     return(
       <div className="spacer">
         <div className="game">
-          <h1>Which artist wrote this song?</h1>
-          <h2>Time remaining: {props.state.timeRemaining}</h2>
-          {props.state.gameData.roundAnswers.map((artist, key) =>
-            <p key={key} onClick={() => {checkAnswer(artist)}}>{artist}</p>
-          )}
-          <ReactAudioPlayer
-            src={props.state.gameData.songData.trackAudio}
-            autoPlay
-            />
+          <div className="gameSpace">
+            <h1>Which artist wrote this song?</h1>
+            <h2>Time remaining: {props.state.timeRemaining}</h2>
+            {props.state.gameData.roundAnswers.map((artist, key) =>
+              <div key={key} className="answerButtons">
+                <p onClick={() => {checkAnswer(artist)}}>{artist}</p>
+              </div>
+            )}
+            <ReactAudioPlayer
+              src={props.state.gameData.songData.trackAudio}
+              autoPlay
+              />
+          </div>
         </div>
         <div className="scoreboard">
           <Scoreboard state={props.state}/>

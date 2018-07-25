@@ -61,6 +61,7 @@
 
 .bubble3:hover {
   background-color: #12ab4a;
+  cursor: pointer;
 }
 
 .linkStyle {
