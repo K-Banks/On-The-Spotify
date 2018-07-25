@@ -59,6 +59,10 @@
   padding-top: 20px;
 }
 
+.bubble3:hover {
+  background-color: #12ab4a;
+}
+
 .linkStyle {
   color: white;
   font-size: 30px;
