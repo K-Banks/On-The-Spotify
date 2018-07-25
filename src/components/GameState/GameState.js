@@ -3,7 +3,9 @@ import {Link} from 'react-router-dom';
 
 function GameState(){
   return(
-    <h2><Link to="/">PLEASE RESTART GAME</Link></h2>
+    <div className="bubble3">
+      <Link className="linkStyle" to="/">PLEASE RESTART GAME</Link>
+    </div>
   )
 }
 
