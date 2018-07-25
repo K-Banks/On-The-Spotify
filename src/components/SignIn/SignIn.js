@@ -18,21 +18,22 @@ function SignIn(props) {
 
   if (props.state.userToken !== '') {
     return(
-      <div className="bubble">
+      <div className="bubble3">
         <Link to="/game" onClick={() => {props.gameStart();}}>START A GAME!</Link>
       </div>
     );
   } else {
     return(
-      <div className="bubble">
-        <form onSubmit={handleNewTokenSubmission}>
+      <div className="bubbleSignIn">
+        <form onSubmit={handleNewTokenSubmission} className="formStyle">
           <input
             type='text'
             id='token'
             placeholder='Enter token string here'
             ref={(input) => {_token = input;}}
           />
-        <button type='submit'>Get my data!</button>
+          <br></br>
+          <button type='submit'>Get my data!</button>
         </form>
       </div>
     )
