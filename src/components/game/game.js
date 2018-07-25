@@ -4,6 +4,8 @@ import ReactAudioPlayer from 'react-audio-player';
 import RoundStart from './../RoundStart/RoundStart';
 import GameState from './../GameState/GameState';
 import EndGame from './../EndGame/EndGame';
+import './game.css';
+import Scoreboard from './../Scoreboard/Scoreboard';
 
 function Game(props){
   function logState() {
@@ -23,6 +25,7 @@ function Game(props){
       <div>
         <h1>Which artist wrote this song?</h1>
         <h2>Time remaining: {props.state.timeRemaining}</h2>
+        <Scoreboard state={props.state}/>
         <button onClick={() => {logState();}}>Press button to print state to console.</button>
         {props.state.gameData.roundAnswers.map((artist, key) =>
           <p key={key} onClick={() => {checkAnswer(artist)}}>{artist}</p>
@@ -38,6 +41,7 @@ function Game(props){
       <div>
         <button onClick={() => {logState();}}>Press button to print state to console.</button>
         <RoundStart state={props.state} toggleRoundStart={props.toggleRoundStart}/>
+        <Scoreboard state={props.state}/>
       </div>
     );
   } else if (props.state.gameData.gameStatus===false && props.state.gameResults.length>=5) {
@@ -45,13 +49,13 @@ function Game(props){
         <div>
           <button onClick={() => {logState();}}>Press button to print state to console.</button>
           <EndGame state={props.state} restartGame={props.restartGame}/>
+          <Scoreboard state={props.state}/>
         </div>
       );
   } else {
     return(
       <div>
         <GameState/>
-        <button onClick={() => {logState();}}>Press button to print state to console.</button>
       </div>
     );
   }

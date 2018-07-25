@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './SignIn.css';
 
 function SignIn(props) {
   let _token = null;
@@ -17,13 +18,13 @@ function SignIn(props) {
 
   if (props.state.userToken !== '') {
     return(
-      <div>
+      <div className="bubble">
         <Link to="/game" onClick={() => {props.gameStart();}}>START A GAME!</Link>
       </div>
     );
   } else {
     return(
-      <div>
+      <div className="bubble">
         <form onSubmit={handleNewTokenSubmission}>
           <input
             type='text'

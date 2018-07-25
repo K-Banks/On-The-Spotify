@@ -3,7 +3,6 @@ import './App.css';
 import SignIn from './components/SignIn/SignIn';
 import { Switch, Route } from 'react-router-dom';
 import Game from './components/game/game';
-import Scoreboard from './components/Scoreboard/Scoreboard';
 import Header from './components/Header/Header';
 import { roundState } from './constants';
 
@@ -309,7 +308,6 @@ class App extends React.Component {
           <Route exact path='/' render={()=><SignIn grabUserToken={this.grabUserToken} gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
         </Switch>
-        <Scoreboard state={this.state}/>
       </div>
     );
   }
