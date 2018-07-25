@@ -1,8 +1,24 @@
-.bubble {
+.spacer {
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.game {
   background-color: #19d85f;
   padding-top: 0.1em;
   padding-bottom: 0.1em;
   border-radius: 50px;
-  margin-left: 250px;
-  margin-right: 250px;
+  height: auto;
+  width: 500px;
+  margin-right: 20px;
+}
+
+.scoreboard {
+  background-color: #19d85f;
+  margin-left: 20px;
+  width: 400px;
+  border-radius: 50px;
 }
