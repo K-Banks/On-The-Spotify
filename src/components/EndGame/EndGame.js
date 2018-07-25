@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './EndGame.css';
 
 function EndGame(props){
   let totalScore = 0;
@@ -12,9 +13,11 @@ function EndGame(props){
 
 
   return(
-    <div>
+    <div className="endGameStyle">
       <h1>You scored {totalScore} points out of 150</h1>
-      <Link onClick={()=>{props.restartGame();}} to='/'>Home</Link>
+      <div className="homeLink">
+        <Link className="linkStyle" onClick={()=>{props.restartGame();}} to='/'>Home</Link>
+      </div>
     </div>
 
   );

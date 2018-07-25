@@ -19,6 +19,7 @@
 .scoreboard {
   background-color: #19d85f;
   margin-left: 20px;
-  width: 400px;
+  width: 500px;
+  padding: 0px 50px;
   border-radius: 50px;
 }
