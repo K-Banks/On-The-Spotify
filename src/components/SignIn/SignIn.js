@@ -19,7 +19,7 @@ function SignIn(props) {
   if (props.state.userToken !== '') {
     return(
       <div className="bubble3">
-        <Link to="/game" onClick={() => {props.gameStart();}}>START A GAME!</Link>
+        <Link className="linkStyle" to="/game" onClick={() => {props.gameStart();}}>START A GAME!</Link>
       </div>
     );
   } else {
