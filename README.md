@@ -111,7 +111,6 @@ state: {
 ## Component Tree
 ![Component Tree](./src/assets/On-The-Spot-ify.jpg)
 
-
 ## Known Issues
 _No known bugs at this time._
 _Please contact author at kayleubanks@gmail.com with any bugs._
