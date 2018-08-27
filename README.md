@@ -13,6 +13,7 @@
 
 _This app is a music quiz using the Spotify API and user data to create a personalized experience. This application is built with React via the create-react-app._
 
+
 ## Flow of app
 * User will be prompted to log in using their Spotify account(postponed)
   * OAuth 2.0 token request will prompt user for permission to access their data
@@ -33,7 +34,7 @@ _This app is a music quiz using the Spotify API and user data to create a person
     * request top tracks:
       * pick random song, store track name, artist name, and preview url
 * Example state object:
-state: { 
+state: {
   game results: {
     answerResults: [boolean, boolean, ..., boolean],
     answerPoints: [#, #, ..., #]
