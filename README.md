@@ -1,4 +1,4 @@
-# _On The Spot-ify_
+﻿# _On The Spot-ify_
 
 #### By: _**Kayl Eubanks**_
 
@@ -10,7 +10,6 @@
 * Spotify API example libraries - https://developer.spotify.com/documentation/web-api/libraries/
 
 ## Description
-
 _This app is a music quiz using the Spotify API and user data to create a personalized experience. This application is built with React via the create-react-app._
 
 
@@ -112,7 +111,6 @@ state: {
 
 ## Component Tree
 ![Component Tree](./src/assets/On-The-Spot-ify.jpg)
-
 
 ## Known Issues
 _No known bugs at this time._

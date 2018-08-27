@@ -1,0 +1,53 @@
+.spacer {
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.game {
+  background-color: #19d85f;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  border-radius: 50px;
+  height: auto;
+  width: 500px;
+  margin-right: 20px;
+}
+
+.scoreboard {
+  background-color: #19d85f;
+  margin-left: 20px;
+  width: 500px;
+  padding: 0px 50px;
+  border-radius: 50px;
+}
+
+.scoreboard:hover {
+  cursor: default;
+}
+
+.gameSpace h1:hover {
+  cursor: default;
+}
+
+.gameSpace h2:hover {
+  cursor: default;
+}
+
+.answerButtons {
+  width: 200px;
+  border-radius: 50px;
+  height: 30px;
+  margin-left: 90px;
+}
+
+.answerButtons p {
+  padding-top: 7px;
+}
+
+.answerButtons:hover {
+  background-color: #12ab4a;
+  cursor: pointer;
+}
