@@ -21,6 +21,16 @@ function SignIn(props) {
     window.location = 'https://accounts.spotify.com/authorize?response_type=token&client_id=e0798695220f4b1296dc84f83a2c201c&redirect_uri=http:%2F%2Flocalhost:3000%2F&scope=user-top-read';
   }
 
+  function printLocation() {
+    let location = window.location.href;
+    console.log(location);
+    if (location.includes('#')) {
+      console.log('theres an access token');
+    } else {
+      console.log('no access token');
+    }
+  }
+
   if (props.state.userToken !== '') {
     return(
       <div className="bubble3">
@@ -40,6 +50,7 @@ function SignIn(props) {
           <br></br>
           <button type='submit'>Get my data!</button>
         </form>
+        <button type='button' onClick={() => {printLocation()}}>Print location</button>
       </div>
     )
   }
