@@ -308,7 +308,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
-          <Route path="/access_token" render={()=><Token grabUserToken={this.grabUserToken}/>}/>
+          <Route path="/access_token=:token" render={()=><Token grabUserToken={this.grabUserToken}/>}/>
         </Switch>
       </div>
     );
