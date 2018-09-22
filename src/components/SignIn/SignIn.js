@@ -35,6 +35,7 @@ function SignIn(props) {
     return(
       <div className="bubble3">
         <Link className="linkStyle" to="/game" onClick={() => {props.gameStart();}}>START A GAME!</Link>
+        <button type='button' onClick={() => {printLocation()}}>Print location</button>
       </div>
     );
   } else {
