@@ -4,6 +4,7 @@ import SignIn from './components/SignIn/SignIn';
 import { Switch, Route } from 'react-router-dom';
 import Game from './components/game/game';
 import Header from './components/Header/Header';
+import Token from './components/Token/Token';
 import { roundState } from './constants';
 
 class App extends React.Component {
@@ -305,8 +306,9 @@ class App extends React.Component {
       <div className="App">
         <Header/>
         <Switch>
-          <Route exact path='/' render={()=><SignIn grabUserToken={this.grabUserToken} gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
+          <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
+          <Route path="/access_token" render={()=><Token grabUserToken={this.grabUserToken}/>}/>
         </Switch>
       </div>
     );
