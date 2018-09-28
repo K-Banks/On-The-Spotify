@@ -1,4 +1,4 @@
-﻿# _On The Spot-ify _
+﻿# _On The Spot-ify_
 
 #### By: _**Kayl Eubanks**_
 
