@@ -43,7 +43,7 @@ function Game(props){
         </div>
       </div>
     );
-  } else if (props.state.gameData.gameStatus && props.state.gameData.roundStart === false) {
+  } else if (props.state.gameData.gameStatus === true && props.state.gameData.roundStart === false) {
     return(
       <div className="spacer">
         <div className="game">
