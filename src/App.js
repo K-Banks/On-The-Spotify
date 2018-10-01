@@ -304,7 +304,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header/>
+        <Header state={this.state}/>
         <Switch>
           <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
