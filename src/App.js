@@ -40,6 +40,7 @@ class App extends React.Component {
     let newState = this.state;
     newState.userToken = token;
     this.setState(newState);
+    this.scrapeUserData();
   }
 
   scrapeUserData() {
@@ -239,6 +240,7 @@ class App extends React.Component {
   };
 
   toggleRoundStart() {
+    console.log('you clicked toggle round start');
     let toggle = this.state;
     if (toggle.gameData.roundStart) {
       toggle.gameData.roundStart = false;
@@ -246,6 +248,7 @@ class App extends React.Component {
     } else {
       toggle.gameData.roundStart = true;
       this.setState(toggle);
+      console.log(this.state.gameData.roundStart);
       this.startNextRound();
     }
   }
@@ -308,7 +311,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
-          <Route path="/access_token=:token" render={()=><Token grabUserToken={this.grabUserToken} state={this.state}/>}/>
+          <Route path="/access_token=:token" render={()=><Token grabUserToken={this.grabUserToken} state={this.state} gameStart={this.gameStart}/>}/>
         </Switch>
       </div>
     );
