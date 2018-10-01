@@ -62,7 +62,7 @@ class App extends React.Component {
 
   addUserArtists(data) {
     let tempState = this.state;
-    while (tempState.gameData.answerArtistIds.length < 5) {
+    while (tempState.gameData.answerArtistIds.length < 10) {
       let rng = Math.floor(Math.random() * 20);
       if (tempState.gameData.answerArtistIds.includes(data.items[rng].id)) {
       } else {
@@ -275,7 +275,7 @@ class App extends React.Component {
     this.stopTimer();
     this.addRoundAnswer(boolean);
     this.advanceCurrentRound();
-    if (this.state.gameData.currentRound >= 5) {
+    if (this.state.gameData.currentRound >= 10) {
       this.endGame();
     } else {
       this.toggleRoundStart();
