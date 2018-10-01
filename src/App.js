@@ -240,7 +240,6 @@ class App extends React.Component {
   };
 
   toggleRoundStart() {
-    console.log('you clicked toggle round start');
     let toggle = this.state;
     if (toggle.gameData.roundStart) {
       toggle.gameData.roundStart = false;
@@ -248,7 +247,6 @@ class App extends React.Component {
     } else {
       toggle.gameData.roundStart = true;
       this.setState(toggle);
-      console.log(this.state.gameData.roundStart);
       this.startNextRound();
     }
   }
