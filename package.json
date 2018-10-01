@@ -14,13 +14,14 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-app-env start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
     "babel-jest": "^23.4.0",
-    "jest": "^23.4.1"
+    "jest": "^23.4.1",
+    "react-app-env": "^1.2.2"
   }
 }
