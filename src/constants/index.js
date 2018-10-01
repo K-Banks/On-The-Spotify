@@ -15,7 +15,8 @@ export const roundState = {
     roundStatus: false,
     gameStatus: false,
     roundStart: false,
-    currentRound: 0
+    currentRound: 0,
+    gameRounds: 10
   },
 };
 
