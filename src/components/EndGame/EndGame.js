@@ -5,7 +5,7 @@ import './EndGame.css';
 
 function EndGame(props){
   let totalScore = 0;
-  if (props.state.gameResults.length >= 5) {
+  if (props.state.gameResults.length >= 10) {
     for (var i = 0; i < props.state.gameResults.length; i++) {
       totalScore = props.state.gameResults[i].points + totalScore;
     }
