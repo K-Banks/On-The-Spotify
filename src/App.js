@@ -34,6 +34,8 @@ class App extends React.Component {
     this.prepRound = this.prepRound.bind(this);
     this.endRound = this.endRound.bind(this);
     this.restartGame = this.restartGame.bind(this);
+    this.soundReady = this.soundReady.bind(this);
+    this.startMusic = this.startMusic.bind(this);
   };
 
   grabUserToken(token) {
@@ -155,7 +157,6 @@ class App extends React.Component {
       let tempState = this.state;
       tempState.gameData.songData.trackName = songData.items[rng].name;
       tempState.gameData.songData.trackAudio = songData.items[rng].preview_url;
-      tempState.roundStatus = true;
       this.setState(tempState);
     } else {
       this.getArtistAlbums();
@@ -203,8 +204,9 @@ class App extends React.Component {
   }
 
   startNextRound() {
-    this.startTimer();
     this.randomizeAnswers();
+    this.startMusic();
+    this.startTimer();
   };
 
   endGame() {
@@ -220,6 +222,12 @@ class App extends React.Component {
     if (seconds.timeRemaining === 0) {
       clearInterval(this.timer);
     }
+  }
+
+  soundReady() {
+    let soundReadyState = this.state;
+    soundReadyState.gameData.roundStatus = true;
+    this.setState(soundReadyState);
   }
 
   randomizeAnswers() {
@@ -255,7 +263,7 @@ class App extends React.Component {
   advanceCurrentRound() {
     let newRound = this.state;
     newRound.gameData.currentRound += 1;
-    newRound.roundStatus = false;
+    newRound.gameData.roundStatus = false;
     this.setState(newRound);
   }
 
@@ -284,24 +292,13 @@ class App extends React.Component {
   }
 
   restartGame() {
-    const freshState = {
-      timeRemaining: 0,
-      userToken: '',
-      gameResults: [],
-      gameData: {
-        answerArtistIds: [],
-        songData: {
-          artistName: '',
-          trackName: '',
-          trackAudio: ''
-        },
-        roundAnswers: [],
-        gameStatus: false,
-        roundStart: false,
-        currentRound: 0
-      },
-    };
+    const freshState = roundState;
     this.setState(freshState);
+  }
+
+  startMusic() {
+    let player = document.getElementById('audioPlayer');
+    player.play();
   }
 
   render() {
@@ -310,7 +307,7 @@ class App extends React.Component {
         <Header state={this.state}/>
         <Switch>
           <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
-          <Route path="/game" render={()=><Game state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
+          <Route path="/game" render={()=><Game soundReady={this.soundReady} state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
           <Route path="/access_token=:token" render={()=><Token grabUserToken={this.grabUserToken} state={this.state} gameStart={this.gameStart}/>}/>
         </Switch>
       </div>
