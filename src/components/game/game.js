@@ -32,14 +32,15 @@ function Game(props){
                 <p onClick={() => {checkAnswer(artist)}}>{artist}</p>
               </div>
             )}
-            <ReactAudioPlayer
-              src={props.state.gameData.songData.trackAudio}
-              autoPlay
-              />
           </div>
         </div>
         <div className="scoreboard">
           <Scoreboard state={props.state}/>
+          <ReactAudioPlayer
+            src={props.state.gameData.songData.trackAudio}
+            id={'audioPlayer'}
+            autoPlay
+          />
         </div>
       </div>
     );
@@ -51,6 +52,11 @@ function Game(props){
         </div>
         <div className="scoreboard">
           <Scoreboard state={props.state}/>
+          <ReactAudioPlayer
+            src={props.state.gameData.songData.trackAudio}
+            onCanPlayThrough={props.soundReady}
+            id={'audioPlayer'}
+          />
         </div>
       </div>
     );
@@ -78,7 +84,8 @@ function Game(props){
     state: PropTypes.object,
     endRound: PropTypes.func,
     toggleRoundStart: PropTypes.func,
-    restartGame: PropTypes.func
+    restartGame: PropTypes.func,
+    soundReady: PropTypes.func
   }
 
 export default Game;
