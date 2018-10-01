@@ -34,7 +34,6 @@ class App extends React.Component {
     this.prepRound = this.prepRound.bind(this);
     this.endRound = this.endRound.bind(this);
     this.restartGame = this.restartGame.bind(this);
-    console.log(process.env.REACT_APP_CLIENT_ID);
   };
 
   grabUserToken(token) {
