@@ -6,7 +6,9 @@ import './SignIn.css';
 function SignIn(props) {
 
   function login() {
-    window.location = 'https://accounts.spotify.com/authorize?response_type=token&client_id=' + process.env.REACT_APP_CLIENT_ID + '&redirect_uri=http:%2F%2Flocalhost:3000%2F&scope=user-top-read';
+    let currentLocation = window.location.href;
+    let request =  'https://accounts.spotify.com/authorize?response_type=token&client_id=' + process.env.REACT_APP_CLIENT_ID + '&redirect_uri=' + currentLocation + '&scope=user-top-read'
+    window.location = request;
   }
 
   if (props.state.userToken !== '') {
