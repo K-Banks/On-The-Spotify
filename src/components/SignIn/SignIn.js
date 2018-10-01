@@ -21,7 +21,7 @@ function SignIn(props) {
   } else {
     return(
       <div className="bubbleSignIn">
-        <button type='button' onClick={() => {login()}}>Get my data!</button>
+        <button type='button' className='bubbleButton' onClick={() => {login()}}>Get my data!</button>
       </div>
     )
   }
