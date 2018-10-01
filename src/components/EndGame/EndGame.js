@@ -5,7 +5,8 @@ import './EndGame.css';
 
 function EndGame(props){
   let totalScore = 0;
-  if (props.state.gameResults.length >= 10) {
+  let maxScore = 30 * props.state.gameData.gameRounds;
+  if (props.state.gameResults.length >= props.state.gameData.gameRounds) {
     for (var i = 0; i < props.state.gameResults.length; i++) {
       totalScore = props.state.gameResults[i].points + totalScore;
     }
@@ -14,7 +15,7 @@ function EndGame(props){
 
   return(
     <div className="endGameStyle">
-      <h1>You scored {totalScore} points out of 300</h1>
+      <h1>You scored {totalScore} points out of {maxScore}</h1>
       <div className="homeLink">
         <Link className="linkStyle" onClick={()=>{props.restartGame();}} to='/'>Home</Link>
       </div>
