@@ -14,8 +14,7 @@ class Token extends React.Component {
     let endSlice = location.indexOf("&");
     let accessToken = location.slice(startSlice, endSlice);
     this.props.grabUserToken(accessToken);
-    let redirectURL = baseURL + 'game';
-    window.location = redirectURL;
+    window.location = baseURL;
   }
 
   render() {
@@ -29,7 +28,8 @@ class Token extends React.Component {
 
 Token.propTypes = {
   state: PropTypes.object,
-  grabUserToken: PropTypes.func
+  grabUserToken: PropTypes.func,
+  gameStart: PropTypes.func
 }
 
 export default Token;
