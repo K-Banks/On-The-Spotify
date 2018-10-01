@@ -155,6 +155,7 @@ class App extends React.Component {
       let tempState = this.state;
       tempState.gameData.songData.trackName = songData.items[rng].name;
       tempState.gameData.songData.trackAudio = songData.items[rng].preview_url;
+      tempState.roundStatus = true;
       this.setState(tempState);
     } else {
       this.getArtistAlbums();
@@ -254,6 +255,7 @@ class App extends React.Component {
   advanceCurrentRound() {
     let newRound = this.state;
     newRound.gameData.currentRound += 1;
+    newRound.roundStatus = false;
     this.setState(newRound);
   }
 
