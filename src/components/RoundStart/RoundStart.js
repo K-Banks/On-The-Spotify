@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './RoundStart.css';
 
 function RoundStart(props){
-  if (props.state.roundStatus) {
+  if (props.state.gameData.roundStatus) {
     return(
       <div className="roundStartStyle" onClick={()=>{props.toggleRoundStart();}}>
         <h1>READY TO START</h1>
