@@ -12,6 +12,7 @@ export const roundState = {
       trackAudio: ''
     },
     roundAnswers: [],
+    roundStatus: false,
     gameStatus: false,
     roundStart: false,
     currentRound: 0
