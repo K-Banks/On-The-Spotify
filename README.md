@@ -8,6 +8,7 @@
 * Create React App - https://github.com/facebook/create-react-app.git
 * add CORS extension to browser
 * Spotify API example libraries - https://developer.spotify.com/documentation/web-api/libraries/
+* Live Deployment available at: https://k-banks.github.io/On-The-Spotify/#/
 
 ## Description
 _This app is a music quiz using the Spotify API and user data to create a personalized experience. This application is built with React via the create-react-app._
