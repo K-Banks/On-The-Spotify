@@ -54,7 +54,7 @@ function Game(props){
         </div>
       </div>
     );
-  } else if (props.state.gameData.gameStatus===false && props.state.gameResults.length>=10) {
+  } else if (props.state.gameData.gameStatus===false && props.state.gameResults.length>=props.state.gameData.gameRounds) {
       return(
         <div className="spacer">
           <div className="game">
