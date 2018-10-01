@@ -9,44 +9,6 @@
   height: 100px;
 }
 
-.formStyle input {
-  background-color: #19d85f;
-  border-radius: 50px;
-  border: none;
-  height: 30px;
-  width: 400px;
-  text-align: center;
-  margin-top: 10px;
-  color: white;
-  font-size: 20px;
-}
-
-.formStyle input:focus {
-  background-color: #12ab4a;
-  outline-width: 0;
-  font-size: 10px;
-}
-
-.formStyle input::placeholder {
-  color: white;
-  font-size: 20px;
-}
-
-.formStyle button {
-  background-color: #19d85f;
-  border: 3px solid #ddd;
-  color: white;
-  font-size: 20px;
-  margin-top: 6px;
-  height: 40px;
-  width: 200px;
-  border-radius: 50px;
-}
-
-.formStyle button:hover {
-  background-color: #12ab4a;
-}
-
 .bubble3 {
   background-color: #19d85f;
   padding-top: 0.1em;
