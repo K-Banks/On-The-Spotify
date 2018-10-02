@@ -15,10 +15,10 @@ function Scoreboard(props) {
           </tr>
           {props.state.gameResults.map((results, key) =>
             <tr key={key}>
-            <td>{results.artist}</td>
-            <td>{results.track}</td>
-            <td>{results.points}</td>
-            <td>{results.answerString}</td>
+              <td>{results.artist}</td>
+              <td>{results.track}</td>
+              <td>{results.points}</td>
+              <td>{results.answerString}</td>
             </tr>
           )}
         </tbody>

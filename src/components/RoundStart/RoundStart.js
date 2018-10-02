@@ -6,13 +6,13 @@ function RoundStart(props){
   if (props.state.gameData.roundStatus) {
     return(
       <div className="roundStartStyle" onClick={()=>{props.toggleRoundStart();}}>
-        <h1>READY TO START</h1>
+        <h1>READY TO START ROUND</h1>
       </div>
     );
   } else {
     return(
       <div>
-        <h1>COLLECTING ROUND DATA</h1>
+        <h1>COLLECTING DATA FOR NEXT ROUND</h1>
       </div>
     )
   }

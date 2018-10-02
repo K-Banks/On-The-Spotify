@@ -22,7 +22,7 @@ function Game(props){
       <div className="spacer">
         <div className="game">
           <div className="gameSpace">
-            <h1>Which artist wrote this song?</h1>
+            <h1>Which artist recorded this song?</h1>
             <h2>Time remaining: {props.state.timeRemaining}</h2>
             {props.state.gameData.roundAnswers.map((artist, key) =>
               <div key={key} className="answerButtons">

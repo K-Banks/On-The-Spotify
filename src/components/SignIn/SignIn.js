@@ -15,13 +15,13 @@ function SignIn(props) {
   if (props.state.userToken !== '') {
     return(
       <div className="bubble3">
-        <Link className="linkStyle" to="/game" onClick={() => {props.gameStart();}}>START A GAME!</Link>
+        <Link className="linkStyle" to="/game" onClick={() => {props.gameStart();}}>START GAME</Link>
       </div>
     );
   } else {
     return(
       <div className="bubbleSignIn">
-        <button type='button' className='bubbleButton' onClick={() => {login()}}>Get my data!</button>
+        <button type='button' className='bubbleButton' onClick={() => {login()}}>SCAN MY SPOTIFY LIBRARY</button>
       </div>
     )
   }
