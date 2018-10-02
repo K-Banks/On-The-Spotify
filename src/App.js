@@ -41,8 +41,7 @@ class App extends React.Component {
   grabUserToken(token) {
     let newState = this.state;
     newState.userToken = token;
-    this.setState(newState);
-    this.scrapeUserData();
+    this.setState(newState, () => this.scrapeUserData());
   }
 
   scrapeUserData() {
@@ -201,6 +200,7 @@ class App extends React.Component {
     }
     newState.gameResults.push(roundData);
     this.setState(newState);
+    this.advanceCurrentRound();
   }
 
   startNextRound() {
@@ -254,6 +254,7 @@ class App extends React.Component {
     if (toggle.gameData.roundStart) {
       toggle.gameData.roundStart = false;
       this.setState(toggle);
+      this.prepRound();
     } else {
       toggle.gameData.roundStart = true;
       this.setState(toggle);
@@ -266,6 +267,11 @@ class App extends React.Component {
     newRound.gameData.currentRound += 1;
     newRound.gameData.roundStatus = false;
     this.setState(newRound);
+    if (this.state.gameData.currentRound >= this.state.gameData.gameRounds) {
+      this.endGame();
+    } else {
+      this.toggleRoundStart();
+    }
   }
 
   gameStart(){
@@ -282,16 +288,9 @@ class App extends React.Component {
 
   endRound(boolean) {
     this.stopTimer();
-    let player = document.getElementById('audioPlayer');
-    player.src = '';
+    let audioPlayer = document.getElementById('audioPlayer');
+    audioPlayer.src = '';
     this.addRoundAnswer(boolean);
-    this.advanceCurrentRound();
-    if (this.state.gameData.currentRound >= this.state.gameData.gameRounds) {
-      this.endGame();
-    } else {
-      this.toggleRoundStart();
-      this.prepRound();
-    }
   }
 
   restartGame() {
@@ -300,8 +299,8 @@ class App extends React.Component {
   }
 
   startMusic() {
-    let player = document.getElementById('audioPlayer');
-    player.play();
+    let audioPlayer = document.getElementById('audioPlayer');
+    audioPlayer.play();
   }
 
   render() {
