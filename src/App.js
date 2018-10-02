@@ -95,7 +95,7 @@ class App extends React.Component {
     let tempState = this.state;
     while (wrongArtistsArray.length < 3) {
       let rng = Math.floor(Math.random() * 20);
-      if (wrongArtistsArray.includes(artistData.artists[rng].name)) {
+      if (wrongArtistsArray.includes(artistData.artists[rng].name) || artistData.artists[rng] == undefined) {
       } else {
         wrongArtistsArray.push(artistData.artists[rng].name);
       }
@@ -105,7 +105,6 @@ class App extends React.Component {
   }
 
   getArtistAlbums() {
-    let tempState = this.state;
     const url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/albums';
     fetch(url, {
       method: "GET",
@@ -123,8 +122,7 @@ class App extends React.Component {
             numberOfAlbums += 1;
           }
         }
-        tempState.gameData.songData.artistName = albumData.items[0].artists[0].name;
-        this.setState(tempState);
+        this.state.gameData.songData.artistName = albumData.items[0].artists[0].name;
         this.getRandomSong(albumData, numberOfAlbums);
       }
     )
@@ -171,7 +169,7 @@ class App extends React.Component {
   startTimer() {
     this.resetRoundTimer();
     if (this.timer === 0) {
-      this.timer = setInterval(this.countDown, 1000);
+      this.timer = setInterval(this.countDown(), 1000);
     }
   }
 
