@@ -221,6 +221,7 @@ class App extends React.Component {
     this.setState(seconds);
     if (seconds.timeRemaining === 0) {
       clearInterval(this.timer);
+      this.endRound(false);
     }
   }
 
