@@ -8,9 +8,6 @@ import './game.css';
 import Scoreboard from './../Scoreboard/Scoreboard';
 
 function Game(props){
-  function logState() {
-    console.log(props.state);
-  };
 
   function checkAnswer(artist) {
     if (artist === props.state.gameData.songData.artistName) {
