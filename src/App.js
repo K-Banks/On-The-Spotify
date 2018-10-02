@@ -281,6 +281,8 @@ class App extends React.Component {
 
   endRound(boolean) {
     this.stopTimer();
+    let player = document.getElementById('audioPlayer');
+    player.src = '';
     this.addRoundAnswer(boolean);
     this.advanceCurrentRound();
     if (this.state.gameData.currentRound >= this.state.gameData.gameRounds) {
