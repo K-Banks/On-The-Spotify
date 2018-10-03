@@ -1,0 +1,17 @@
+.bubble2 {
+  background-color: #0bb348;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  border-radius: 50px;
+  margin-top: 50px;
+  margin-left: 35%;
+  width: 30%;
+  height: 40px;
+  color: white;
+  font-size: 30px;
+}
+
+.bubble2:hover {
+  background-color: #0bb34880;
+  cursor: pointer;
+}
