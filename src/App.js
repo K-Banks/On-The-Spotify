@@ -106,8 +106,7 @@ class App extends React.Component {
   }
 
   getArtistAlbums() {
-    let tempState = this.state;
-    const url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/albums';
+    const url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/albums?include_groups=album';
     fetch(url, {
       method: "GET",
       headers: {
@@ -118,14 +117,8 @@ class App extends React.Component {
       response => response.json()
     ).then(
       albumData => {
-        let numberOfAlbums = 0;
-        for (var i = 0; i < albumData.items.length; i++) {
-          if (albumData.items[i].album_type === "album") {
-            numberOfAlbums += 1;
-          }
-        }
-        tempState.gameData.songData.artistName = albumData.items[0].artists[0].name;
-        this.setState(tempState, () => this.getRandomSong(albumData, numberOfAlbums));
+        let numberOfAlbums = albumData.items.length;
+        this.getRandomSong(albumData, numberOfAlbums);
       }
     )
   }
@@ -156,6 +149,15 @@ class App extends React.Component {
       let tempState = this.state;
       tempState.gameData.songData.trackName = songData.items[rng].name;
       tempState.gameData.songData.trackAudio = songData.items[rng].preview_url;
+
+      let answerArtistId = this.state.gameData.answerArtistIds[this.state.gameData.currentRound];
+      for (var i = 0; i < songData.items[rng].artists.length; i++) {
+        if (songData.items[rng].artists[i].id === answerArtistId) {
+          tempState.gameData.songData.artistName = songData.items[rng].artists[i].name;
+          break;
+        }
+      }
+
       this.setState(tempState);
     } else {
       this.getRandomSong(albumData, numberOfAlbums);
