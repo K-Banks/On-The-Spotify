@@ -17,7 +17,7 @@ function EndGame(props){
     <div className="endGameStyle">
       <h1>You scored {totalScore} points out of {maxScore}</h1>
       <div className="homeLink">
-        <Link className="linkStyle" onClick={()=>{props.restartGame();}} to='/'>START NEW GAME</Link>
+        <Link className="linkStyle" onClick={()=>{props.restartGame()}} to='/'>START NEW GAME</Link>
       </div>
     </div>
 
