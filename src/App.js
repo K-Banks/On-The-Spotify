@@ -31,11 +31,11 @@ class App extends React.Component {
     this.getRandomSong = this.getRandomSong.bind(this);
     this.addRandomSong = this.addRandomSong.bind(this);
     this.grabUserToken = this.grabUserToken.bind(this);
-    this.prepRound = this.prepRound.bind(this);
     this.endRound = this.endRound.bind(this);
     this.restartGame = this.restartGame.bind(this);
     this.soundReady = this.soundReady.bind(this);
     this.startMusic = this.startMusic.bind(this);
+    this.advanceCurrentRound = this.advanceCurrentRound.bind(this);
   };
 
   grabUserToken(token) {
@@ -95,16 +95,17 @@ class App extends React.Component {
     let tempState = this.state;
     while (wrongArtistsArray.length < 3) {
       let rng = Math.floor(Math.random() * 20);
-      if (wrongArtistsArray.includes(artistData.artists[rng].name) || artistData.artists[rng] == undefined) {
+      if (wrongArtistsArray.includes(artistData.artists[rng].name) || artistData.artists[rng] === undefined) {
       } else {
         wrongArtistsArray.push(artistData.artists[rng].name);
       }
     }
     tempState.gameData.roundAnswers = wrongArtistsArray;
-    this.setState(tempState);
+    this.setState(tempState, () => this.getArtistAlbums());
   }
 
   getArtistAlbums() {
+    let tempState = this.state;
     const url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/albums';
     fetch(url, {
       method: "GET",
@@ -122,8 +123,8 @@ class App extends React.Component {
             numberOfAlbums += 1;
           }
         }
-        this.state.gameData.songData.artistName = albumData.items[0].artists[0].name;
-        this.getRandomSong(albumData, numberOfAlbums);
+        tempState.gameData.songData.artistName = albumData.items[0].artists[0].name;
+        this.setState(tempState, () => this.getRandomSong(albumData, numberOfAlbums));
       }
     )
   }
@@ -163,13 +164,13 @@ class App extends React.Component {
   resetRoundTimer() {
     let reset = this.state;
     reset.timeRemaining = 30;
-    this.setState(reset);
+    this.setState(reset, () => this.startTimer());
   };
 
   startTimer() {
-    this.resetRoundTimer();
+    this.startMusic();
     if (this.timer === 0) {
-      this.timer = setInterval(this.countDown(), 1000);
+      this.timer = setInterval(this.countDown, 1000);
     }
   }
 
@@ -197,14 +198,11 @@ class App extends React.Component {
       answerString: rightWrong
     }
     newState.gameResults.push(roundData);
-    this.setState(newState);
-    this.advanceCurrentRound();
+    this.setState(newState, () => this.advanceCurrentRound());
   }
 
   startNextRound() {
     this.randomizeAnswers();
-    this.startMusic();
-    this.startTimer();
   };
 
   endGame() {
@@ -244,19 +242,17 @@ class App extends React.Component {
     }
     let newState = this.state;
     newState.gameData.roundAnswers = randomizedAnswersArray;
-    this.setState(newState);
+    this.setState(newState, () => this.resetRoundTimer());
   };
 
   toggleRoundStart() {
     let toggle = this.state;
     if (toggle.gameData.roundStart) {
       toggle.gameData.roundStart = false;
-      this.setState(toggle);
-      this.prepRound();
+      this.setState(toggle, () => this.getWrongArtists());
     } else {
       toggle.gameData.roundStart = true;
-      this.setState(toggle);
-      this.startNextRound();
+      this.setState(toggle, () => this.startNextRound());
     }
   }
 
@@ -266,22 +262,16 @@ class App extends React.Component {
     newRound.gameData.roundStatus = false;
     this.setState(newRound);
     if (this.state.gameData.currentRound >= this.state.gameData.gameRounds) {
-      this.endGame();
+      this.setState(newRound, () => this.endGame());
     } else {
-      this.toggleRoundStart();
+      this.setState(newRound, () => this.toggleRoundStart());
     }
   }
 
   gameStart(){
     let game = this.state;
     game.gameData.gameStatus = true;
-    this.setState(game);
-    this.prepRound();
-  }
-
-  prepRound() {
-    this.getWrongArtists();
-    this.getArtistAlbums();
+    this.setState(game, () => this.getWrongArtists());
   }
 
   endRound(boolean) {
