@@ -2,23 +2,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './ErrorComponent.css';
 
-function ErrorComponent(){
+function ErrorComponent(props){
 
   function goHome() {
+    props.resetResponseError();
     window.location = '/';
   }
 
+  if (props.responseError.status) {
+    return(
+      <div className='errorComponent'>
+        <div>
+          <br/>
+          <h1>Oops, something went wrong with the app.</h1>
+          <br/>
+          <h2>Error retrieving data: {props.responseError.status}</h2>
+          <p>Further information: {props.responseError.statusText}</p>
+          <br/>
+          <h3 className='bubbleButton' onClick={() => {goHome()}}>Click here to try again.</h3>
+        </div>
+      </div>
+    )
+  }
   return(
-    <div class='errorComponent'>
+    <div className='errorComponent'>
       <div>
         <h1>PAGE NOT FOUND</h1>
         <br/>
-        <h3 class='bubbleButton' onClick={() => {goHome()}}>click here to return to home</h3>
+        <h3 className='bubbleButton' onClick={() => {goHome()}}>click here to return to home</h3>
       </div>
     </div>
   )
 }
 
-  ErrorComponent.propTypes = {}
+  ErrorComponent.propTypes = {
+    responseError: PropTypes.object,
+    resetResponseError: PropTypes.func
+  }
 
 export default ErrorComponent;
