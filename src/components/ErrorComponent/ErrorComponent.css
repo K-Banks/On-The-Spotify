@@ -9,6 +9,11 @@
   margin-left: 25%;
 }
 
+.errorComponent div {
+  width: 80%;
+  margin-left: 10%;
+}
+
 .errorComponent:hover {
   cursor: default;
 }
