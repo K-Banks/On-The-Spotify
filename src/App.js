@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import Game from './components/game/game';
 import Header from './components/Header/Header';
 import Token from './components/Token/Token';
+import ErrorComponent from './components/ErrorComponent/ErrorComponent';
 import { roundState } from './constants';
 
 class App extends React.Component {
@@ -305,6 +306,7 @@ class App extends React.Component {
           <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game soundReady={this.soundReady} state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
           <Route path="/access_token=:token" render={()=><Token grabUserToken={this.grabUserToken} state={this.state} gameStart={this.gameStart}/>}/>
+          <Route component={ErrorComponent} />
         </Switch>
       </div>
     );
