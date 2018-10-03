@@ -10,6 +10,8 @@ function ErrorComponent(props){
   }
 
   if (props.responseError.status) {
+    console.log('Response error: ' + props.responseError.status);
+    console.log('Information: ' + props.responseError.statusText);
     return(
       <div className='errorComponent'>
         <div>
