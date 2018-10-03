@@ -1,11 +1,21 @@
 .homeLink {
-  width: 200px;
+  width: 80%;
   border-radius: 50px;
-  margin-left: 90px;
+  margin-left: 10%;
+  padding: 10px 5px;
+}
+
+.spanStyle {
+  color: #222;
 }
 
 .homeLink:hover {
   background-color: #176b35;
+}
+
+.endGameStyle {
+  width: 90%;
+  margin-left: 5%;
 }
 
 .endGameStyle h1:hover {
