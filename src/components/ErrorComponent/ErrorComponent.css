@@ -29,3 +29,20 @@
   background-color: #12ab4a;
   cursor: pointer;
 }
+
+.bubbleButton {
+  background-color: #19d85f;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  border-radius: 50px;
+  margin-top: 20px;
+  height: 60px;
+  color: white;
+  font-size: 20px;
+  border: none;
+}
+
+.bubbleButton:hover {
+  background-color: #12ab4a;
+  cursor: pointer;
+}
