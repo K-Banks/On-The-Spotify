@@ -11,7 +11,7 @@ function RoundStart(props){
     );
   } else {
     return(
-      <div>
+      <div className="roundCollectionStyle">
         <h1>COLLECTING DATA FOR NEXT ROUND</h1>
       </div>
     )
