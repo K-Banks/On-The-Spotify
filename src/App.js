@@ -45,7 +45,7 @@ class App extends React.Component {
   }
 
   scrapeUserData() {
-    const url = 'https://api.spotify.com/v1/me/top/artists';
+    const url = 'https://api.spotify.com/v1/me/top/artists?time_range=long_term';
     fetch(url, {
       method: "GET",
       headers: {
