@@ -16,9 +16,7 @@ class Token extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>This component shouldnt last long enough for you to see this.</p>
-      </div>
+      <div></div>
     )
   }
 }
