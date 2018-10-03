@@ -143,12 +143,12 @@ class App extends React.Component {
       response => response.json()
     ).then(
       songData => {
-        this.addRandomSong(songData);
+        this.addRandomSong(songData, albumData, numberOfAlbums);
       }
     )
   }
 
-  addRandomSong(songData) {
+  addRandomSong(songData, albumData, numberOfAlbums) {
     let numberOfTracks = songData.items.length;
     let rng = Math.floor(Math.random() * numberOfTracks);
     if (songData.items[rng].preview_url) {
@@ -157,7 +157,7 @@ class App extends React.Component {
       tempState.gameData.songData.trackAudio = songData.items[rng].preview_url;
       this.setState(tempState);
     } else {
-      this.getArtistAlbums();
+      this.getRandomSong(albumData, numberOfAlbums);
     }
   }
 
