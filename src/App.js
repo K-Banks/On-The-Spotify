@@ -15,6 +15,7 @@ class App extends React.Component {
     let freshState = Object.assign({}, roundState);
     this.state = freshState;
     this.timer = 0;
+    this.responseError = {};
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
@@ -38,12 +39,23 @@ class App extends React.Component {
     this.soundReady = this.soundReady.bind(this);
     this.startMusic = this.startMusic.bind(this);
     this.advanceCurrentRound = this.advanceCurrentRound.bind(this);
+    this.handleResponseError = this.handleResponseError.bind(this);
+    this.resetResponseError = this.resetResponseError.bind(this);
   };
 
   grabUserToken(token) {
     let newState = this.state;
     newState.userToken = token;
     this.setState(newState, () => this.scrapeUserData());
+  }
+
+  handleResponseError(response) {
+    this.responseError = response;
+    window.location = '/#/error' + response.status;
+  }
+
+  resetResponseError() {
+    this.responseError = {};
   }
 
   scrapeUserData() {
@@ -55,7 +67,13 @@ class App extends React.Component {
         "Authorization": "Bearer " + this.state.userToken
       }
     }).then(
-      response => response.json()
+      response => {
+        if (response.status === 200) {
+          return response.json()
+        } else {
+          this.handleResponseError(response)
+        }
+      }
     ).then(
       data => {
         this.addUserArtists(data);
@@ -84,7 +102,13 @@ class App extends React.Component {
         "Authorization": "Bearer " + this.state.userToken
       }
     }).then(
-      response => response.json()
+      response => {
+        if (response.status === 200) {
+          return response.json()
+        } else {
+          this.handleResponseError(response)
+        }
+      }
     ).then(
       artistData=>{
         this.addWrongArtists(artistData);
@@ -115,7 +139,13 @@ class App extends React.Component {
         "Authorization": "Bearer " + this.state.userToken
       }
     }).then(
-      response => response.json()
+      response => {
+        if (response.status === 200) {
+          return response.json()
+        } else {
+          this.handleResponseError(response)
+        }
+      }
     ).then(
       albumData => {
         let numberOfAlbums = albumData.items.length;
@@ -135,7 +165,13 @@ class App extends React.Component {
         "Authorization": "Bearer " + this.state.userToken
       }
     }).then(
-      response => response.json()
+      response => {
+        if (response.status === 200) {
+          return response.json()
+        } else {
+          this.handleResponseError(response)
+        }
+      }
     ).then(
       songData => {
         this.addRandomSong(songData, albumData, numberOfAlbums);
@@ -150,7 +186,6 @@ class App extends React.Component {
       let tempState = this.state;
       tempState.gameData.songData.trackName = songData.items[rng].name;
       tempState.gameData.songData.trackAudio = songData.items[rng].preview_url;
-
       let answerArtistId = this.state.gameData.answerArtistIds[this.state.gameData.currentRound];
       for (var i = 0; i < songData.items[rng].artists.length; i++) {
         if (songData.items[rng].artists[i].id === answerArtistId) {
@@ -158,7 +193,6 @@ class App extends React.Component {
           break;
         }
       }
-
       this.setState(tempState);
     } else {
       this.getRandomSong(albumData, numberOfAlbums);
@@ -169,7 +203,7 @@ class App extends React.Component {
     let reset = this.state;
     reset.timeRemaining = 30;
     this.setState(reset, () => this.startTimer());
-  };
+  }
 
   startTimer() {
     this.startMusic();
@@ -288,8 +322,7 @@ class App extends React.Component {
   restartGame() {
     const freshState = Object.assign({}, roundState);
     this.setState(freshState, () => {
-      let location = window.href;
-
+      window.location = '/';
     });
   }
 
@@ -306,7 +339,7 @@ class App extends React.Component {
           <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game soundReady={this.soundReady} state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
           <Route path="/access_token=:token" render={()=><Token grabUserToken={this.grabUserToken} state={this.state} gameStart={this.gameStart}/>}/>
-          <Route component={ErrorComponent} />
+          <Route render={()=><ErrorComponent responseError={this.responseError} resetResponseError={this.resetResponseError}/>}/>
         </Switch>
       </div>
     );
