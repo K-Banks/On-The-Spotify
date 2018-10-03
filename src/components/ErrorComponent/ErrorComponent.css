@@ -1,5 +1,5 @@
 .errorComponent {
-  background-color: #19d85f;
+  background-color: #0bb348;
   padding-top: 0.1em;
   padding-bottom: 0.1em;
   border-radius: 50px;
@@ -26,12 +26,12 @@
 }
 
 .errorComponent h3:hover {
-  background-color: #12ab4a;
+  background-color: #0bb34880;
   cursor: pointer;
 }
 
 .bubbleButton {
-  background-color: #19d85f;
+  background-color: #0bb348;
   padding-top: 0.1em;
   padding-bottom: 0.1em;
   border-radius: 50px;
@@ -43,6 +43,6 @@
 }
 
 .bubbleButton:hover {
-  background-color: #12ab4a;
+  background-color: #0bb34880;
   cursor: pointer;
 }
