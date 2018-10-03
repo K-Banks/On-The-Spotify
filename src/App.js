@@ -11,7 +11,8 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = roundState;
+    let freshState = Object.assign({}, roundState);
+    this.state = freshState;
     this.timer = 0;
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
     this.startTimer = this.startTimer.bind(this);
@@ -282,8 +283,11 @@ class App extends React.Component {
   }
 
   restartGame() {
-    const freshState = roundState;
-    this.setState(freshState);
+    const freshState = Object.assign({}, roundState);
+    this.setState(freshState, () => {
+      let location = window.href;
+
+    });
   }
 
   startMusic() {
