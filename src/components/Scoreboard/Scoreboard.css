@@ -1,1 +1,42 @@
+table {
+  width: 100%;
+  text-align: left;
+}
 
+th {
+  border-bottom: 2px solid white;
+  border-collapse: collapse;
+  border-spacing: 5;
+  font-size: 18px;
+  padding: 10px 8px 5px 5px;
+}
+
+td {
+  font-size: 15px;
+  border-bottom: 1px solid white;
+  padding-top: 10px;
+  padding-bottom: 4px;
+  padding-right: 8px;
+  padding-left: 5px;
+}
+
+#tableArtist {
+  width: 25%;
+}
+
+#tableTrack {
+  width: 45%;
+}
+
+#tablePoints {
+  width: 15%;
+  padding-right: 15px;
+}
+
+#tableAnswer {
+  width: 15%;
+}
+
+.centerStyle {
+  text-align: center;
+}
