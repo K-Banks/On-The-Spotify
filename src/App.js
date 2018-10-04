@@ -41,6 +41,7 @@ class App extends React.Component {
     this.advanceCurrentRound = this.advanceCurrentRound.bind(this);
     this.handleResponseError = this.handleResponseError.bind(this);
     this.resetResponseError = this.resetResponseError.bind(this);
+    this.addSongToUserLibrary = this.addSongToUserLibrary.bind(this);
   };
 
   grabUserToken(token) {
@@ -56,6 +57,24 @@ class App extends React.Component {
 
   resetResponseError() {
     this.responseError = {};
+  }
+
+  addSongToUserLibrary(songId) {
+    let tempSongId = '3HivSIXzkrz9d6k4kGwHCU';
+    const url = 'https://api.spotify.com/v1/me/tracks?ids=' + tempSongId;
+    let anotherUrl = 'https://api.spotify.com/v1/me/tracks';
+    fetch(anotherUrl, {
+      method: "PUT",
+      body: [tempSongId],
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + this.state.userToken
+      }
+    }).then(
+      response => {
+        console.log(response);
+      }
+    )
   }
 
   scrapeUserData() {
@@ -335,6 +354,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header state={this.state}/>
+        <button type="button" onClick={() => this.addSongToUserLibrary()}>Click to test adding song to library</button>
         <Switch>
           <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game soundReady={this.soundReady} state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
