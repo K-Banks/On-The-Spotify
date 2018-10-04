@@ -8,7 +8,7 @@ function SignIn(props) {
   function login() {
     let currentLocation = window.location.href;
     let redirect_uri = encodeURIComponent(currentLocation);
-    let request =  'https://accounts.spotify.com/authorize?response_type=token&client_id=' + process.env.REACT_APP_CLIENT_ID + '&redirect_uri=' + redirect_uri + '&scope=user-top-read';
+    let request =  'https://accounts.spotify.com/authorize?response_type=token&client_id=' + process.env.REACT_APP_CLIENT_ID + '&redirect_uri=' + redirect_uri + '&scope=user-top-read+user-library-modify';
     window.location = request;
   }
 
