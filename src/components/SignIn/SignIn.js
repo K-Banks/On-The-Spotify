@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import './SignIn.css';
 
 function SignIn(props) {
+  let currentLocation = window.location.href;
+  console.log(currentLocation);
 
   function login() {
-    let currentLocation = window.location.href;
     let redirect_uri = encodeURIComponent(currentLocation);
-    let request =  'https://accounts.spotify.com/authorize?response_type=token&client_id=' + process.env.REACT_APP_CLIENT_ID + '&redirect_uri=' + redirect_uri + '&scope=user-top-read+user-library-modify';
+    let request =  'https://accounts.spotify.com/authorize?response_type=token&client_id=' + process.env.REACT_APP_CLIENT_ID + '&redirect_uri=' + redirect_uri + '&scope=user-top-read';
     window.location = request;
   }
 
