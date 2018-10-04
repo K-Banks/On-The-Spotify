@@ -14,10 +14,12 @@ function EndGame(props){
 
 
   return(
-    <div className="endGameStyle">
-      <h1>You scored <span className='spanStyle'>{totalScore}</span> points out of <span className='spanStyle'>{maxScore}</span></h1>
-      <div className="homeLink">
-        <Link className="linkStyle" onClick={()=>{props.restartGame()}} to='/'>START NEW GAME</Link>
+    <div className="endGameStyleContainer">
+      <div className="endGameStyle">
+        <h1>You scored <span className='spanStyle'>{totalScore}</span> points out of <span className='spanStyle'>{maxScore}</span></h1>
+        <div className="homeLink">
+          <Link className="linkStyle" onClick={()=>{props.restartGame()}} to='https://k-banks.github.io/On-The-Spotify/#/'>START NEW GAME</Link>
+        </div>
       </div>
     </div>
 

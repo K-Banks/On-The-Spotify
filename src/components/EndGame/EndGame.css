@@ -13,9 +13,16 @@
   background-color: #176b35;
 }
 
+.endGameStyleContainer {
+  background-color: #0bb348;
+  border-radius: 50px;
+  height: 200px;
+}
+
 .endGameStyle {
-  width: 90%;
-  margin-left: 5%;
+  width: 80%;
+  margin-left: 10%;
+  padding-top: 5px;
 }
 
 .endGameStyle h1:hover {
