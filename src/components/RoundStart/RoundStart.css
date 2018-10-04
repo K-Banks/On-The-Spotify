@@ -1,21 +1,25 @@
 .roundStartStyle {
+  background-color: #0bb348;
   border-radius: 50px;
-  height: auto;
-  margin: 20px;
+  height: 80px;
+}
+
+.roundStartStyle h1 {
+  padding: 20px 10px 0px;
 }
 
 .roundCollectionStyle {
+  background-color: #0bb348;
   border-radius: 50px;
-  height: auto;
-  margin: 20px;
+  height: 100px;
+}
+
+.roundCollectionStyle h1 {
+  padding: 10px 10px 0px;
 }
 
 .roundCollectionStyle:hover {
   cursor: default;
-}
-
-.roundStartStyle h1 {
-  padding-top: 5px;
 }
 
 .roundStartStyle:hover {
