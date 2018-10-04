@@ -5,20 +5,20 @@ import './Scoreboard.css';
 function Scoreboard(props) {
   return(
     <div>
-      <table>
+      <table cellspacing="0">
         <tbody>
           <tr>
-          <th>Artist Name</th>
-          <th>Track Name</th>
-          <th>Points</th>
-          <th>Answer</th>
+            <th id="tableArtist">Artist</th>
+            <th id="tableTrack">Track</th>
+            <th id="tablePoints">Points</th>
+            <th id="tableAnswer">Answer</th>
           </tr>
           {props.state.gameResults.map((results, key) =>
             <tr key={key}>
               <td>{results.artist}</td>
               <td>{results.track}</td>
-              <td>{results.points}</td>
-              <td>{results.answerString}</td>
+              <td className="centerStyle">{results.points}</td>
+              <td className="centerStyle">{results.answerString}</td>
             </tr>
           )}
         </tbody>
