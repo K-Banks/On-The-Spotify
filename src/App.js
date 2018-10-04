@@ -341,7 +341,7 @@ class App extends React.Component {
   restartGame() {
     const freshState = Object.assign({}, roundState);
     this.setState(freshState, () => {
-      window.location = '/';
+      window.location = '/On-The-Spotify/#/';
     });
   }
 
@@ -354,7 +354,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header state={this.state}/>
-        <button type="button" onClick={() => this.addSongToUserLibrary()}>Click to test adding song to library</button>
         <Switch>
           <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
           <Route path="/game" render={()=><Game soundReady={this.soundReady} state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
@@ -368,3 +367,5 @@ class App extends React.Component {
 
 
 export default App;
+
+// <button type="button" onClick={() => this.addSongToUserLibrary()}>Click to test adding song to library</button>

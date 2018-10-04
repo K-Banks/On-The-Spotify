@@ -4,7 +4,7 @@ import './GameState.css';
 
 function GameState(){
   function navigateHome() {
-    window.location = '/';
+    window.location = '/On-The-Spotify/#/';
   }
 
   return(
