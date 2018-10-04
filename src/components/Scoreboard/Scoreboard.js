@@ -4,7 +4,7 @@ import './Scoreboard.css';
 
 function Scoreboard(props) {
   return(
-    <div>
+    <div id="scoreboardBackground">
       <table cellSpacing="0">
         <tbody>
           <tr>

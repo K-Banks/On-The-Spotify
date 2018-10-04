@@ -3,6 +3,13 @@ table {
   text-align: left;
 }
 
+#scoreboardBackground {
+  background-color: #0bb348;
+  width: auto;
+  padding: 0px 50px 20px;
+  border-radius: 50px;
+}
+
 th {
   border-bottom: 2px solid white;
   border-collapse: collapse;
