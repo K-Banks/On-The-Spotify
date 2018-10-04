@@ -5,7 +5,7 @@ import './Scoreboard.css';
 function Scoreboard(props) {
   return(
     <div>
-      <table cellspacing="0">
+      <table cellSpacing="0">
         <tbody>
           <tr>
             <th id="tableArtist">Artist</th>

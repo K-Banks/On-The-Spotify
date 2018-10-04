@@ -7,7 +7,7 @@ th {
   border-bottom: 2px solid white;
   border-collapse: collapse;
   border-spacing: 5;
-  font-size: 18px;
+  font-size: 22px;
   padding: 10px 8px 5px 5px;
 }
 
@@ -25,16 +25,16 @@ td {
 }
 
 #tableTrack {
-  width: 45%;
+  width: 41%;
 }
 
 #tablePoints {
-  width: 15%;
+  width: 17%;
   padding-right: 15px;
 }
 
 #tableAnswer {
-  width: 15%;
+  width: 17%;
 }
 
 .centerStyle {
