@@ -24,6 +24,11 @@
   border-radius: 50px;
 }
 
+.gameSpace {
+  width: 90%;
+  margin-left: 5%;
+}
+
 .scoreboard:hover {
   cursor: default;
 }
@@ -39,12 +44,13 @@
 .answerButtons {
   width: 200px;
   border-radius: 50px;
-  height: 30px;
+  height: auto;
   margin-left: 90px;
 }
 
 .answerButtons p {
-  padding-top: 7px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 .answerButtons:hover {
