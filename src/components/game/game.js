@@ -22,16 +22,18 @@ function Game(props){
       <div className="spacer">
         <div className="game">
           <div className="gameSpace">
-            <h1>Which artist recorded this song?</h1>
-            <h2>Time remaining: {props.state.timeRemaining}</h2>
-            {props.state.gameData.roundAnswers.map((artist, key) =>
-              <div key={key} className="answerButtons">
-                <p onClick={() => {checkAnswer(artist)}}>{artist}</p>
-              </div>
-            )}
+            <div id="gameSpacePadding">
+              <h1>Which artist recorded this song?</h1>
+              <h2>Time remaining: {props.state.timeRemaining}</h2>
+              {props.state.gameData.roundAnswers.map((artist, key) =>
+                <div key={key} className="answerButtons">
+                  <p onClick={() => {checkAnswer(artist)}}>{artist}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <div className="scoreboard">
+        <div>
           <Scoreboard state={props.state}/>
           <ReactAudioPlayer
             src={props.state.gameData.songData.trackAudio}
@@ -47,7 +49,7 @@ function Game(props){
         <div className="game">
           <RoundStart state={props.state} toggleRoundStart={props.toggleRoundStart}/>
         </div>
-        <div className="scoreboard">
+        <div>
           <Scoreboard state={props.state}/>
           <ReactAudioPlayer
             src={props.state.gameData.songData.trackAudio}
@@ -63,7 +65,7 @@ function Game(props){
           <div className="game">
             <EndGame state={props.state} restartGame={props.restartGame}/>
           </div>
-          <div className="scoreboard">
+          <div>
             <Scoreboard state={props.state}/>
           </div>
         </div>
