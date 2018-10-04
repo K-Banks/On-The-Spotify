@@ -1,8 +1,12 @@
 .spacer {
   margin-top: 50px;
-  margin-left: 100px;
-  margin-right: 100px;
-  display: flex;
+  width: 90%;
+  display: grid;
+  margin-left: 5%;
+  margin-right: 5%;
+  grid-template-columns: minmax(300px, 36%) minmax(400px, 50%);
+  grid-gap: 4%;
+  grid-auto-rows: auto;
   justify-content: center;
 }
 
@@ -12,15 +16,13 @@
   padding-bottom: 0.1em;
   border-radius: 50px;
   height: auto;
-  width: 500px;
-  margin-right: 20px;
+  width: auto;
 }
 
 .scoreboard {
   background-color: #0bb348;
-  margin-left: 20px;
-  width: 500px;
-  padding: 0px 50px;
+  width: auto;
+  padding: 0px 50px 20px;
   border-radius: 50px;
 }
 
