@@ -39,7 +39,7 @@ _This app is a music quiz using the Spotify API and user data to create a person
 ![Component Tree](./src/assets/On-The-Spot-ify.jpg) // 10.05.18 Needs update.
 
 ## Known Issues
-_Some artists cause app to freeze during round loading phase. Some artists do not have related artists available, which is how wrong answers are generated._
+_No known bugs at this time._
 _Please contact author at kayleubanks@gmail.com with any bugs._
 
 ## Future Implementations:
