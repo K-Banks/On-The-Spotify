@@ -77,6 +77,7 @@ class App extends React.Component {
     )
   }
 
+//Sometimes the same artist shows up twice. Need to pin down why this is happening and how to prevent it
   scrapeUserData() {
     const url = 'https://api.spotify.com/v1/me/top/artists?time_range=long_term';
     fetch(url, {
@@ -112,6 +113,7 @@ class App extends React.Component {
     this.setState(tempState);
   }
 
+// Need to create solution when artists have no related artists. Can store extra artists in state or repeat an artist from a previous question.
   getWrongArtists() {
     let url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/related-artists';
     fetch(url, {
