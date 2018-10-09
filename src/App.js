@@ -42,6 +42,7 @@ class App extends React.Component {
     this.handleResponseError = this.handleResponseError.bind(this);
     this.resetResponseError = this.resetResponseError.bind(this);
     this.addSongToUserLibrary = this.addSongToUserLibrary.bind(this);
+    this.getWrongArtistsWithArtistId = this.getWrongArtistsWithArtistId.bind(this);
   };
 
   grabUserToken(token) {
@@ -106,14 +107,15 @@ class App extends React.Component {
     while (tempState.gameData.answerArtistIds.length < this.state.gameData.gameRounds) {
       let rng = Math.floor(Math.random() * 20);
       if (tempState.gameData.answerArtistIds.includes(data.items[rng].id)) {
+
       } else {
         tempState.gameData.answerArtistIds.push(data.items[rng].id);
       }
     }
+    console.log(tempState.gameData.answerArtistIds);
     this.setState(tempState);
   }
 
-// Need to create solution when artists have no related artists. Can store extra artists in state or repeat an artist from a previous question.
   getWrongArtists() {
     let url = 'https://api.spotify.com/v1/artists/' + this.state.gameData.answerArtistIds[this.state.gameData.currentRound] + '/related-artists';
     fetch(url, {
@@ -131,24 +133,54 @@ class App extends React.Component {
         }
       }
     ).then(
-      artistData=>{
+      artistData => {
+        this.addWrongArtists(artistData);
+      }
+    )
+  }
+
+  getWrongArtistsWithArtistId(artistId) {
+    let url = 'https://api.spotify.com/v1/artists/' + artistId + '/related-artists';
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + this.state.userToken
+      }
+    }).then(
+      response => {
+        if (response.status === 200) {
+          return response.json()
+        } else {
+          this.handleResponseError(response)
+        }
+      }
+    ).then(
+      artistData => {
         this.addWrongArtists(artistData);
       }
     )
   }
 
   addWrongArtists(artistData) {
-    let wrongArtistsArray = [];
-    let tempState = this.state;
-    while (wrongArtistsArray.length < 3) {
-      let rng = Math.floor(Math.random() * 20);
-      if (wrongArtistsArray.includes(artistData.artists[rng].name) || artistData.artists[rng] === undefined) {
-      } else {
-        wrongArtistsArray.push(artistData.artists[rng].name);
+    if (artistData.artists[0] === undefined || artistData === undefined) {
+      let newArtistrng = Math.floor(Math.random() * 10);
+      console.log('no related artists, finding new false answers');
+      // current solution does not guarantee artists related to the answer. May want to refactor state to store additional artist id's for extra questions in fringe cases such as this
+      this.getWrongArtistsWithArtistId(this.state.gameData.answerArtistIds[newArtistrng]);
+    } else {
+      let wrongArtistsArray = [];
+      let tempState = this.state;
+      while (wrongArtistsArray.length < 3) {
+        let rng = Math.floor(Math.random() * 20);
+        if (wrongArtistsArray.includes(artistData.artists[rng].name) || artistData.artists[rng] === undefined) {
+        } else {
+          wrongArtistsArray.push(artistData.artists[rng].name);
+        }
       }
+      tempState.gameData.roundAnswers = wrongArtistsArray;
+      this.setState(tempState, () => this.getArtistAlbums());
     }
-    tempState.gameData.roundAnswers = wrongArtistsArray;
-    this.setState(tempState, () => this.getArtistAlbums());
   }
 
   getArtistAlbums() {
