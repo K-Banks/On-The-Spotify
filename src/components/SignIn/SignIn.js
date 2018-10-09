@@ -5,7 +5,6 @@ import './SignIn.css';
 
 function SignIn(props) {
   let currentLocation = window.location.href;
-  console.log(currentLocation);
 
   function login() {
     let redirect_uri = encodeURIComponent(currentLocation);
