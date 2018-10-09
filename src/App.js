@@ -112,7 +112,6 @@ class App extends React.Component {
         tempState.gameData.answerArtistIds.push(data.items[rng].id);
       }
     }
-    console.log(tempState.gameData.answerArtistIds);
     this.setState(tempState);
   }
 
