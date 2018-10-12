@@ -49,8 +49,9 @@ _Please contact author at kayleubanks@gmail.com with any bugs._
 
 ## Technologies Used
  * JavaScript
- * React
+ * React.js
  * JSX
+ * Redux.js
  * This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
  * This project was deployed using [React GH Pages](https://github.com/gitname/react-gh-pages).
 
