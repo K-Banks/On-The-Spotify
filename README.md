@@ -48,7 +48,6 @@ _Please contact author at kayleubanks@gmail.com with any bugs._
 * Multiplayer mode that will use common artists between players.
 
 ## Technologies Used
- * JavaScript
  * React.js
  * JSX
  * Redux.js
