@@ -61,12 +61,10 @@ class App extends React.Component {
   }
 
   addSongToUserLibrary(songId) {
-    let tempSongId = '3HivSIXzkrz9d6k4kGwHCU';
-    const url = 'https://api.spotify.com/v1/me/tracks?ids=' + tempSongId;
     let anotherUrl = 'https://api.spotify.com/v1/me/tracks';
     fetch(anotherUrl, {
       method: "PUT",
-      body: [tempSongId],
+      body: [songId],
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + this.state.userToken
