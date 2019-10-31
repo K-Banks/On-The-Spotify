@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactAudioPlayer from 'react-audio-player';
 import RoundStart from './../RoundStart/RoundStart';
 import GameState from './../GameState/GameState';
 import EndGame from './../EndGame/EndGame';
 import './game.css';
 import Scoreboard from './../Scoreboard/Scoreboard';
-import AudioComponent from './../AudioComponent/AudioComponent';
 
 function Game(props){
 
@@ -36,11 +34,10 @@ function Game(props){
         </div>
         <div>
           <Scoreboard state={props.state}/>
-          <ReactAudioPlayer
+          <audio
             src={props.state.gameData.songData.trackAudio}
-            id={'audioPlayer'}
-            autoPlay
-          />
+            id='audioHTML'
+          ></audio>
         </div>
       </div>
     );
@@ -52,15 +49,12 @@ function Game(props){
         </div>
         <div>
           <Scoreboard state={props.state}/>
-          <ReactAudioPlayer
-            src={props.state.gameData.songData.trackAudio}
+          <audio
+            onCanPlay={props.checkAudioReadyState}
             onCanPlayThrough={props.soundReady}
-            id={'audioPlayer'}
-          />
-          <AudioComponent
-            state={props.state}
-            soundReady={props.soundReady}
-          />
+            src={props.state.gameData.songData.trackAudio}
+            id='audioHTML'
+          ></audio>
         </div>
       </div>
     );
@@ -89,7 +83,8 @@ function Game(props){
     endRound: PropTypes.func,
     toggleRoundStart: PropTypes.func,
     restartGame: PropTypes.func,
-    soundReady: PropTypes.func
+    soundReady: PropTypes.func,
+    checkAudioReadyState: PropTypes.func
   }
 
 export default Game;
