@@ -43,6 +43,7 @@ class App extends React.Component {
     this.resetResponseError = this.resetResponseError.bind(this);
     this.addSongToUserLibrary = this.addSongToUserLibrary.bind(this);
     this.getWrongArtistsWithArtistId = this.getWrongArtistsWithArtistId.bind(this);
+    this.checkAudioReadyState = this.checkAudioReadyState.bind(this);
   };
 
   grabUserToken(token) {
@@ -309,6 +310,14 @@ class App extends React.Component {
     }
   }
 
+  checkAudioReadyState() {
+    let audioElement = document.getElementById("audioHTML");
+    console.log(audioElement);
+    if (audioElement.readyState > 3) {
+      this.soundReady();
+    }
+  }
+
   soundReady() {
     let soundReadyState = this.state;
     soundReadyState.gameData.roundStatus = true;
@@ -364,7 +373,7 @@ class App extends React.Component {
 
   endRound(boolean) {
     this.stopTimer();
-    let audioPlayer = document.getElementById('audioPlayer');
+    let audioPlayer = document.getElementById('audioHTML');
     audioPlayer.src = '';
     this.addRoundAnswer(boolean);
   }
@@ -377,7 +386,7 @@ class App extends React.Component {
   }
 
   startMusic() {
-    let audioPlayer = document.getElementById('audioPlayer');
+    let audioPlayer = document.getElementById('audioHTML');
     audioPlayer.play();
   }
 
@@ -386,10 +395,33 @@ class App extends React.Component {
       <div className="App">
         <Header state={this.state}/>
         <Switch>
-          <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} gatherUserData={this.gatherUserData}/>} />
-          <Route path="/game" render={()=><Game soundReady={this.soundReady} state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
-          <Route path="/access_token=:token" render={()=><Token grabUserToken={this.grabUserToken} state={this.state} gameStart={this.gameStart}/>}/>
-          <Route render={()=><ErrorComponent responseError={this.responseError} resetResponseError={this.resetResponseError}/>}/>
+          <Route exact path='/' render={()=>
+            <SignIn
+              gameStart={this.gameStart}
+              state={this.state} gatherUserData={this.gatherUserData}
+            />
+          }/>
+          <Route path="/game" render={()=>
+            <Game
+              soundReady={this.soundReady}
+              state={this.state}
+              endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}
+              checkAudioReadyState={this.checkAudioReadyState}
+            />
+          }/>
+          <Route path="/access_token=:token" render={()=>
+            <Token
+              grabUserToken={this.grabUserToken}
+              state={this.state}
+              gameStart={this.gameStart}
+            />
+          }/>
+          <Route render={()=>
+            <ErrorComponent
+              responseError={this.responseError}
+              resetResponseError={this.resetResponseError}
+            />
+          }/>
         </Switch>
       </div>
     );
