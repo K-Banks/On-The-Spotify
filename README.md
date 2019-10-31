@@ -52,6 +52,7 @@ _This app is a music quiz using the Spotify API and user data to create a person
  * React.js
  * JSX
  * Redux.js
+ * React-Audio-Player
  * This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
  * This project was deployed using [React GH Pages](https://github.com/gitname/react-gh-pages).
 
