@@ -39,9 +39,9 @@ _This app is a music quiz using the Spotify API and user data to create a person
 ![Component Tree](./src/assets/On-The-Spot-ify.jpg) // 10.05.18 Needs update.
 
 ## Known Issues
-_Firefox Browser compatibility issue. May not load audio clips._
-_Formatting is not consistent on medium and small screens._
-_Same artist may occasionally show twice in answers._
+* _Firefox Browser compatibility issue. May not load audio clips._
+* _Formatting is not consistent on medium and small screens._
+* _Same artist may occasionally show twice in answers._
 
 ## Future Implementations:
 * High score board recording best scores for set period of time.
