@@ -6,6 +6,7 @@ import GameState from './../GameState/GameState';
 import EndGame from './../EndGame/EndGame';
 import './game.css';
 import Scoreboard from './../Scoreboard/Scoreboard';
+import AudioComponent from './../AudioComponent/AudioComponent';
 
 function Game(props){
 
@@ -55,6 +56,10 @@ function Game(props){
             src={props.state.gameData.songData.trackAudio}
             onCanPlayThrough={props.soundReady}
             id={'audioPlayer'}
+          />
+          <AudioComponent
+            state={props.state}
+            soundReady={props.soundReady}
           />
         </div>
       </div>
