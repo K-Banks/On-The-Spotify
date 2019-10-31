@@ -29,7 +29,7 @@ function SignIn(props) {
 
 SignIn.propTypes = {
   gameStart: PropTypes.func,
-  scrapeUserData: PropTypes.func,
+  gatherUserData: PropTypes.func,
   state: PropTypes.object,
   grabUserToken: PropTypes.func
 }

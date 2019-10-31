@@ -26,7 +26,7 @@ class App extends React.Component {
     this.toggleRoundStart = this.toggleRoundStart.bind(this);
     this.gameStart = this.gameStart.bind(this);
     this.endGame = this.endGame.bind(this);
-    this.scrapeUserData = this.scrapeUserData.bind(this);
+    this.gatherUserData = this.gatherUserData.bind(this);
     this.addUserArtists = this.addUserArtists.bind(this);
     this.getWrongArtists = this.getWrongArtists.bind(this);
     this.addWrongArtists = this.addWrongArtists.bind(this);
@@ -48,7 +48,7 @@ class App extends React.Component {
   grabUserToken(token) {
     let newState = this.state;
     newState.userToken = token;
-    this.setState(newState, () => this.scrapeUserData());
+    this.setState(newState, () => this.gatherUserData());
   }
 
   handleResponseError(response) {
@@ -77,7 +77,7 @@ class App extends React.Component {
   }
 
 //Sometimes the same artist shows up twice. Need to pin down why this is happening and how to prevent it
-  scrapeUserData() {
+  gatherUserData() {
     const url = 'https://api.spotify.com/v1/me/top/artists?time_range=long_term';
     fetch(url, {
       method: "GET",
@@ -386,7 +386,7 @@ class App extends React.Component {
       <div className="App">
         <Header state={this.state}/>
         <Switch>
-          <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} scrapeUserData={this.scrapeUserData}/>} />
+          <Route exact path='/' render={()=><SignIn gameStart={this.gameStart} state={this.state} gatherUserData={this.gatherUserData}/>} />
           <Route path="/game" render={()=><Game soundReady={this.soundReady} state={this.state} endRound={this.endRound} toggleRoundStart={this.toggleRoundStart} restartGame={this.restartGame}/>} />
           <Route path="/access_token=:token" render={()=><Token grabUserToken={this.grabUserToken} state={this.state} gameStart={this.gameStart}/>}/>
           <Route render={()=><ErrorComponent responseError={this.responseError} resetResponseError={this.resetResponseError}/>}/>
