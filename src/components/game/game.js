@@ -51,7 +51,6 @@ function Game(props){
           <Scoreboard state={props.state}/>
           <audio
             onCanPlay={props.checkAudioReadyState}
-            onCanPlayThrough={props.soundReady}
             src={props.state.gameData.songData.trackAudio}
             id='audioHTML'
           ></audio>
