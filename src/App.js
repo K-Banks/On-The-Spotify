@@ -361,6 +361,7 @@ class App extends React.Component {
     let toggle = this.state;
     if (toggle.gameData.roundStart) {
       toggle.gameData.roundStart = false;
+      this.checkAudioTimer = 0;
       this.setState(toggle, () => this.getWrongArtists());
     } else {
       toggle.gameData.roundStart = true;
