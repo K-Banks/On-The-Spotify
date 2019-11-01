@@ -314,23 +314,16 @@ class App extends React.Component {
 
   checkAudioReadyState() {
     let audioElement = document.getElementById("audioHTML");
+    console.log('this.checkAudioTimer: ' + this.checkAudioTimer);
     console.log(audioElement.readyState);
     if (audioElement.readyState > 3 || this.checkAudioTimer === null) {
       console.log('triggered ready from oncanplay');
       this.soundReady();
-      if (this.checkAudioTimer !== 0 && this.checkAudioTimer !== null) {
-        clearInterval(this.checkAudioTimer);
-      }
-      this.checkAudioTimer = 0;
     } else if (this.audioLoadTimer === 10) {
       this.soundReady();
-      if (this.checkAudioTimer !== 0 && this.checkAudioTimer !== null) {
-        clearInterval(this.checkAudioTimer);
-      }
-      this.checkAudioTimer = 0;
     } else {
       this.audioLoadTimer += 1;
-      console.log('triggered recheck' + this.audioLoadTimer);
+      clearTimeout(this.checkAudioTimer);
       this.checkAudioTimer = setInterval(this.checkAudioReadyState, 1000);
     }
   }
@@ -340,9 +333,7 @@ class App extends React.Component {
     if (soundReadyState.gameData.roundStatus === false) {
       soundReadyState.gameData.roundStatus = true;
       this.setState(soundReadyState);
-      if (this.checkAudioTimer !== 0 && this.checkAudioTimer !== null) {
-        clearInterval(this.checkAudioTimer);
-      }
+      clearTimeout(this.checkAudioTimer);
       this.checkAudioTimer = null;
       this.audioLoadTimer = 0;
     }
