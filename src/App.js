@@ -15,10 +15,12 @@ class App extends React.Component {
     let freshState = Object.assign({}, roundState);
     this.state = freshState;
     this.timer = 0;
+    this.audioLoadTimer = 0;
     this.responseError = {};
     this.randomizeAnswers = this.randomizeAnswers.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
+    this.audioLoadCountDown = this.audioLoadCountDown.bind(this);
     this.resetRoundTimer = this.resetRoundTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.addRoundAnswer = this.addRoundAnswer.bind(this);
@@ -312,16 +314,35 @@ class App extends React.Component {
 
   checkAudioReadyState() {
     let audioElement = document.getElementById("audioHTML");
-    console.log(audioElement);
+    console.log(audioElement.readyState);
     if (audioElement.readyState > 3) {
+      console.log('triggered ready from oncanplay');
       this.soundReady();
+    } else {
+      this.audioLoadTimer = setInterval(this.audioLoadCountDown, 1000);
+    }
+  }
+
+  audioLoadCountDown() {
+    let seconds = this.state;
+    seconds.audioLoadTimeRemaining = seconds.audioLoadTimeRemaining - 1;
+    this.setState(seconds);
+    if (seconds.audioLoadTimeRemaining === 0) {
+      clearInterval(this.audioLoadTimer);
+      this.endRound(false);
     }
   }
 
   soundReady() {
     let soundReadyState = this.state;
-    soundReadyState.gameData.roundStatus = true;
-    this.setState(soundReadyState);
+    if (soundReadyState.gameData.roundStatus = false) {
+      soundReadyState.gameData.roundStatus = true;
+      this.setState(soundReadyState);
+      if (this.audioLoadTimer !== 0) {
+        clearInterval(this.audioLoadTimer);
+        this.audioLoadTimer = 0;
+      }
+    }
   }
 
   randomizeAnswers() {
