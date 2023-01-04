@@ -9,7 +9,7 @@
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "5.0.1",
     "redux": "^4.0.0",
     "redux-api-middleware": "^2.3.0",
     "redux-thunk": "^2.3.0"
@@ -25,7 +25,7 @@
   "devDependencies": {
     "babel-jest": "^23.4.0",
     "gh-pages": "^2.0.0",
-    "jest": "^23.4.1",
+    "jest": "^29.3.1",
     "react-app-env": "^1.2.2"
   }
 }
